@@ -1,2 +1,2 @@
 # learnSystem
-##just for Learing
+##just for Learning
