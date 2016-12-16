@@ -1,0 +1,53 @@
+<!doctype html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>薛云微课堂</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- user-scalable=no 禁用缩放功能 -->
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="styles/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="styles/css/index.css"/>
+</head>
+<body ng-app="BlankApp" ng-cloak style="z-index:1;">
+  <nav class="navbar navbar-default gummy_nav" role="navigation" ng-controller="TopMenuCtrl">
+      <div class="container">
+        <div class="navbar-header">
+            <img src="./images/logo.png" class="logo" id="logo"/>
+            <a class="navbar-brand" href="#" style="color:#FFFFFF;">薛云微课堂</a>
+        </div>
+        <div>
+            <form class="navbar-form navbar-right" role="search">
+                <a class="gummy_btn_a">登录</a>
+                <a class="gummy_btn_a">注册</a>
+            </form>
+        </div>
+      </div>
+  </nav>
+  <div class="content">
+      <!-- <div id="loading-bar-container"></div>  -->
+
+    	<!-- <div class="maincontent" ng-controller="WarnCtrl">
+    		 <div class="uiViewContent" ui-view id="uiViewContent"></div>
+    	</div> -->
+  </div>
+  <!-- bower_components -->
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+
+  <!-- <script src="scripts/app.js"></script> -->
+  <script src="scripts/controllers/TopMenuController.js"></script>
+
+
+</body>
+</html>
