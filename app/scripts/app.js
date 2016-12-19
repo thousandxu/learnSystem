@@ -1,11 +1,15 @@
 angular.module('BlankApp',[
-
+	'ngAnimate',
+	'ngResource',
+	'ngMaterial',
+      	'ui.router'
 ])
-.config(['$stateProvider','$urlRouterProvider','cfpLoadingBarProvider',function($stateProvider,$urlRouterProvider,cfpLoadingBarProvider){
-	// $stateProvider.state('eventlist',{
-  //   		url: '/eventlist',
-  //   		templateUrl: 'view/eventlist.html',
-  //       controller: 'EventListCtrl'
-  //   	})
+.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
+	$urlRouterProvider.when("", "/index");
+	$stateProvider.state('index',{
+    		url: '/index',
+    		templateUrl: 'views/courses_index.html',
+                          controller: 'CourseIndexCtrl'
+    	})
 
 }]);
