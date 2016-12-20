@@ -31,3 +31,36 @@
   user-select: none;
   background-image: none;
 }
+.gummy_line_none{
+   outline: none;
+}
+.gummy_dialog_title{
+    width: 100%;
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+}
+.gummy_dialog_title .title{
+    display: inline-block;
+    float: left;
+    margin-left: 10px;
+    font-size: 16px;
+}
+.gummy_dialog_title span{
+    display: inline-block;
+    float: right;
+    margin: 6px;
+}
+.gummy_dialog_content{
+    width: calc(100% - 60px);
+    margin: 0 30px;
+}
+.gummy_dialog_content .row:not(:first-child){
+     margin-top: 15px;
+}
+.login_label{
+    float: right;
+    height: 34px;
+    line-height: 34px;
+    margin-bottom: 0;
+}

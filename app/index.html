@@ -21,8 +21,8 @@
         </div>
         <div>
             <form class="navbar-form navbar-right" role="search">
-                <a class="gummy_btn_a">登录</a>
-                <a class="gummy_btn_a">注册</a>
+                <a class="gummy_btn_a" ng-click="showLogin($event)">登录</a>
+                <a class="gummy_btn_a" ng-click="showRegister()">注册</a>
             </form>
         </div>
       </div>
@@ -44,10 +44,13 @@
   <script src="bower_components/angular-material/angular-material.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
-
+  
   <script src="scripts/app.js"></script>
+  <!-- controllers -->
   <script src="scripts/controllers/TopMenuController.js"></script>
   <script src="scripts/controllers/CourseIndexController.js"></script>
+  <!-- directives -->
+  <script src="scripts/directives/msgFactory.js"></script>
 
 
 </body>
