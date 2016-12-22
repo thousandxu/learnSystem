@@ -1,0 +1,38 @@
+/*course_index.html --- css*/
+
+.course1 {
+    background-position: 0 0;
+    background-size: 100%;
+}
+.course2 {
+    background-position: 0 10.9%;
+    background-size: 100%;
+}
+.course3 {
+    background-position: 0 21.7%;
+    background-size: 100%;
+}
+.course4 {
+    background-position: 0 32.6%;
+    background-size: 100%;
+}
+.course5 {
+    background-position: 0 43.4%;
+    background-size: 100%;
+}
+.course6 {
+    background-position: 0 54.2%;
+    background-size: 100%;
+}
+.course1, .course2, .course3, .course4, .course5, .course6 {
+    display: inline-block;
+    width: 100%;
+    padding: 50%;
+    background: url(./images/stuff-sprite1.png) no-repeat;
+    background-color: #fff;
+    overflow: hidden;
+    text-indent: -9999px;
+    text-align: left;
+    vertical-align: bottom;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+}
