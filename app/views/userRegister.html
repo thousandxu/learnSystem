@@ -5,6 +5,7 @@
             <span class="glyphicon glyphicon-remove show-connect-close gummy_line_none" aria-hidden="true" ng-click="closeFunction()" style="outline: none;"></span>
         </div>
         <div class="gummy_dialog_content">
+            <from role="form" name="user" ng-submit="userRegister(user.$valid)" class="form-horizontal" novalidate>
                 <div class="row">
                     <div class="col-md-4">
                          <label class="login_label">
@@ -13,7 +14,7 @@
                          </label>
                     </div>
                     <div class="col-md-8">
-                         <input placeholder="请输入用户名" type="text" class="form-control" ng-model="queryName"/>
+                         <input placeholder="请输入用户名" type="text" class="form-control" ng-model="user.account"/>
                      </div>
                  </div>
                  <div class="row">
@@ -24,7 +25,7 @@
                          </label>
                     </div>
                     <div class="col-md-8">
-                         <input placeholder="请输入用户密码" type="password" class="form-control" ng-model="queryDesc"/>
+                         <input placeholder="请输入用户密码" type="password" class="form-control" ng-model="user.password" minlength="6" />
                     </div>
                  </div>
                  <div class="row">
@@ -35,7 +36,7 @@
                          </label>
                     </div>
                     <div class="col-md-8">
-                         <input placeholder="确认用户密码,密码需保持一致" type="password" class="form-control" ng-model="queryDesc"/>
+                         <input placeholder="确认用户密码,密码需保持一致" type="password" class="form-control" ng-model="user.checkPassword" minlength="6"/>
                     </div>
                  </div>
                  <div class="row">
@@ -46,7 +47,7 @@
                         </label>
                     </div>
                     <div class="col-md-8">
-                         <input placeholder="请输入用户邮箱" type="text" class="form-control" ng-model="queryDesc"/>
+                         <input placeholder="请输入用户邮箱" type="email" class="form-control" ng-model="user.email"/>
                     </div>
                  </div>
                  <div class="row">
@@ -56,13 +57,16 @@
                          </label>
                     </div>
                     <div class="col-md-8">
-                         <input placeholder="请输入手机号" type="text" class="form-control" ng-model="queryDesc"/>
+                         <input placeholder="请输入手机号" type="text" class="form-control" ng-model="user.mobile"/>
                     </div>
                  </div>
-        </div>
-         <div class="save-result" style="padding:10px 0 0 0;margin:10px 185px">
-            <button type="button" class="btn btn-info gummy_line_none" ng-click="saveSql()">注册</button>
-            <button type="button" class="btn btn-warning gummy_line_none" ng-click="closeFunction()" style="margin-left: 15px;">取消</button>
+                 <div class="row">
+                        <div class="save-result" style="padding:10px 0 0 0;margin:10px 185px">
+                            <button ng-disabled="user.$invalid" type="submit" class="btn btn-info gummy_line_none" >注册</button>
+                            <button type="button" class="btn btn-warning gummy_line_none" ng-click="closeFunction()" style="margin-left: 15px;">取消</button>
+                        </div>
+                 </div>
+            <from>
         </div>
     </md-dialog-content>
 </md-dialog>

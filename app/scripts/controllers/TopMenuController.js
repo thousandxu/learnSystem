@@ -34,6 +34,15 @@ angular.module('BlankApp')
       $scope.closeFunction = function(){
       	$mdDialog.cancel();
       }
+
+      $scope.judgeMail = function(email){
+      	 var patt1 = new RegExp(/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/);
+              var res = patt1.test(email);
+              if(!res){
+                $scope.showError = true;
+                $scope.errorMsg = "电子邮箱格式不正确"; 
+              } 
+      }
 }])
 //用户注册模块
 .controller('UserRegisterCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','$mdDialog',

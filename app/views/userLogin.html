@@ -10,11 +10,11 @@
                          <label class="login_label">用户邮箱</label>
                     </div>
                     <div class="col-md-8">
-                         <input placeholder="请输入用户邮箱" type="text" class="form-control" ng-model="email"/>
+                         <input placeholder="请输入用户邮箱" type="email" class="form-control" ng-model="email" ng-blur="judgeMail(email)"/>
                      </div>
-                     <!-- <div class="dbname_error_msg" ng-show="showError" style="top: 40px;left: 145px;width: 180px;">
+                     <div class="gummy_warn" ng-show="showError" style="top: 15px;left: 135px;width: 160px;">
                            <span ng-bind="errorMsg"></span>
-                     </div> -->
+                     </div>
                  </div>
                  <div class="row">
                     <div class="col-md-4">
