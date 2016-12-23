@@ -1,0 +1,76 @@
+/*course_index.html --- css*/
+.course_contain{
+    display: inline-block;
+    width: 144px;
+    height: 216px;
+}
+.course_box {
+     display: inline-block;
+     width: 136px;
+     height: 136px;
+     margin:0 4px;
+     position: absolute;
+}
+.course_hoverd{
+    z-index: 2;
+    background: rgba(0,0,0,0.4);
+    position: absolute;
+    top: 0px;
+    height: 136px;
+    padding: 51px 27px;
+}
+.courses_circle_contain{
+    position: relative;
+    top: 134px;
+    width: 144px;
+    height: 100px;
+}
+.courses_circle{
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    background: #fff;
+    margin-left: 30px;
+    display: inline-block;
+}
+.courses_img{
+    width: 88%;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.course1, .course2, .course3, .course4, .course5, .course6 {
+    display: inline-block;
+    width: 100%;
+    padding: 50%;
+    background: url(/images/course-list.png) no-repeat;
+    background-color: #fff;
+    overflow: hidden;
+    text-indent: -9999px;
+    text-align: left;
+    vertical-align: bottom;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+}
+.course1 {
+    background-position: 0 0;
+    background-size: 100%;
+}
+.course2 {
+    background-position: 0 10.9%;
+    background-size: 100%;
+}
+.course3 {
+    background-position: 0 21.7%;
+    background-size: 100%;
+}
+.course4 {
+    background-position: 0 32.6%;
+    background-size: 100%;
+}
+.course5 {
+    background-position: 0 43.4%;
+    background-size: 100%;
+}
+.course6 {
+    background-position: 0 54.2%;
+    background-size: 100%;
+}
