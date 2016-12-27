@@ -31,18 +31,20 @@
 			 </a>
 		 </div>
 	</section>
-	<section>
+	<section style="height: 400px;">
 		 <div class="coures_wrapper">
 		 	<div class="container">
-		 		<div class="row">
+		 		<div class="row course_header">
 		 		       <h3>Courses</h3>
             				 <h2 style="font-family: '方正兰亭黑_GBK'">私人前端学习平台精选课程</h2>
 		 		</div>
-		 		<div class="row">
+		 		<p>学习方式有 ppt ，视频 ，实例等，还可以与小伙伴组成小队，参加易学堂的团队制作活动。</p>
+		 		<a class="chapter_button"><button class="btn btn-warning btn-lg"><span>请选择课程</span></button></a>
+		 		<div class="row course_list">
 		 		       <div class="course_contain">
 			 			 <div class="course_box">
-			 			       <div class="course1"></div>
-			 			       <div class="course_hoverd">
+			 			       <div class="course1" ng-mouseenter="showChapter($event)"></div>
+			 			       <div class="course_hoverd" ng-if="courseMenu.course1" ng-mouseleave="hideChapter()">
 			 			      		<a class="btn btn-primary">查看课程</a>
 			 			       </div>
 			 			 </div>
@@ -50,13 +52,13 @@
 			 			 	 <div class="courses_circle">
 			 			 	       <img src="/images/html.svg" class="courses_img">
 			 			       </div>
-			 			       <span>HTML</span>
+			 			       <span class="course_name">HTML</span>
 			 			 </div> 
 		 		       </div>
 		 		       <div class="course_contain">
 			 			 <div class="course_box">
-			 			       <div class="course2"></div>
-			 			       <div class="course_hoverd">
+			 			       <div class="course2" ng-mouseenter="showChapter($event)"></div>
+			 			       <div class="course_hoverd" ng-if="courseMenu.course2" ng-mouseleave="hideChapter()">
 			 			      		<a class="btn btn-primary">查看课程</a>
 			 			       </div>
 			 			 </div>
@@ -64,13 +66,13 @@
 			 			 	 <div class="courses_circle">
 			 			 	 	<img src="/images/javascript.svg" class="courses_img">
 			 			       </div>
-			 			       <span>JavaScript</span>
+			 			       <span class="course_name">JavaScript</span>
 			 			 </div> 
 		 		       </div>
 		 		       <div class="course_contain">
 			 			 <div class="course_box">
-			 			       <div class="course3"></div>
-			 			       <div class="course_hoverd">
+			 			       <div class="course3" ng-mouseenter="showChapter($event)"></div>
+			 			       <div class="course_hoverd" ng-if="courseMenu.course3" ng-mouseleave="hideChapter()">
 			 			      		<a class="btn btn-primary">查看课程</a>
 			 			       </div>
 			 			 </div>
@@ -78,13 +80,13 @@
 			 			 	 <div class="courses_circle">
 			 			 	 	<img src="/images/css.svg" class="courses_img">
 			 			       </div>
-			 			       <span>CSSdfgds</span>
+			 			       <span class="course_name">CSS</span>
 			 			 </div> 
 		 		       </div>
 		 		       <div class="course_contain">
 			 			 <div class="course_box">
-			 			       <div class="course4"></div>
-			 			       <div class="course_hoverd">
+			 			       <div class="course4" ng-mouseenter="showChapter($event)"></div>
+			 			       <div class="course_hoverd" ng-if="courseMenu.course4" ng-mouseleave="hideChapter()">
 			 			      		<a class="btn btn-primary">查看课程</a>
 			 			       </div>
 			 			 </div>
@@ -92,13 +94,13 @@
 			 			 	 <div class="courses_circle">
 			 			 	 	<img src="/images/jquery.svg" class="courses_img">
 			 			       </div>
-			 			       <span>JQuery</span>
+			 			       <span class="course_name">JQuery</span>
 			 			 </div> 
 		 		       </div>
 		 		       <div class="course_contain">
 			 			 <div class="course_box">
-			 			       <div class="course5"></div>
-			 			       <div class="course_hoverd">
+			 			       <div class="course5" ng-mouseenter="showChapter($event)"></div>
+			 			       <div class="course_hoverd" ng-if="courseMenu.course5" ng-mouseleave="hideChapter()">
 			 			      		<a class="btn btn-primary">查看课程</a>
 			 			       </div>
 			 			 </div>
@@ -106,13 +108,13 @@
 			 			 	 <div class="courses_circle">
 			 			 	 	<img src="/images/bootstrap.svg" class="courses_img">
 			 			       </div>
-			 			       <span>BootStrap</span>
+			 			       <span class="course_name">BootStrap</span>
 			 			 </div> 
 		 		       </div>
 		 		       <div class="course_contain">
 			 			 <div class="course_box">
-			 			       <div class="course6"></div>
-			 			       <div class="course_hoverd">
+			 			       <div class="course6" ng-mouseenter="showChapter($event)"></div>
+			 			       <div class="course_hoverd" ng-if="courseMenu.course6" ng-mouseleave="hideChapter()">
 			 			      		<a class="btn btn-primary">查看课程</a>
 			 			       </div>
 			 			 </div>
@@ -120,11 +122,39 @@
 			 			 	 <div class="courses_circle">
 			 			 	 	<img src="/images/ajax.svg" class="courses_img">
 			 			       </div>
-			 			       <span>AJAX</span>
+			 			       <span class="course_name">AJAX</span>
 			 			 </div> 
 		 		       </div>
 		 		</div>
 		 	</div>
 		 </div>
 	</section>
+       <section class="special_learn_way">
+       	 <div class="container">
+       	 	 <div class="row course_header" style="margin-top: 120px;">
+       	 	       <h2 style="color: #4EABD9;">學云微课堂特色学习</h2>
+            		       <h3 style="font-family: '方正兰亭黑_GBK';color: #fff;">赶紧选择小伙伴，一起加入学习吧！</h3>
+       	 	 </div>
+       	 	 <div class="row feature_holder">
+       	 	 	 <div>
+       	 	 	 	<div class="feature_description">
+       	 	 	 		<div>
+       	 	 	 			<h3>边交友边学习</h3>
+       	 	 	 			<h2>学习小组</h2>
+       	 	 	 		</div>
+       	 	 	 		<p>可以在线交友，跟小伙伴一起讨论、学习</p>
+       	 	 	 		<a href="#">开始交友</a>
+       	 	 	 	</div>
+       	 	 	 	<aside class="feature-image features-editor-animation">
+			                    <!-- <img src="/images/features-editor.svg" alt="">
+			                    <img src="/images/features-editor-wf04.svg" alt="" class="editor--backgreen">
+			                    <img src="/images/features-editor-wf01.svg" alt="" class="wf01">
+			                    <img src="/images/features-editor-wf02.svg" alt="" class="wf02">
+			                    <img src="/images/features-editor-wf03.svg" alt="" class="wf03">
+			                    <div class="nav-arrow"><img src="/images/features-editor-cursor.svg" alt="" class=""></div> -->
+			             </aside>
+       	 	 	 </div>
+       	 	 </div>
+       	 </div>
+       </section>
 </div>
