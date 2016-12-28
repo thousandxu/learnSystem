@@ -45,10 +45,15 @@ angular.module('BlankApp')
       }
 }])
 //用户注册模块
-.controller('UserRegisterCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','$mdDialog',
-      function($rootScope, $scope, $http,$location, eventbus, $mdDialog){
+.controller('UserRegisterCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','$mdDialog','userRegisterStore',
+      function($rootScope, $scope, $http,$location, eventbus, $mdDialog,userRegisterStore){
       
-      $scope.closeFunction = function(){
-      	$mdDialog.cancel();
-      }
+       $scope.closeFunction = function(){
+        	$mdDialog.cancel();
+       }
+
+       $scope.userRegister = function(user){
+             console.info("注册",user);
+             
+       }
 }])

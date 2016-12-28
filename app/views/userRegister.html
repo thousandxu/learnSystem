@@ -1,11 +1,11 @@
-<md-dialog style="width:500px;height:340px;">
+<md-dialog style="width:500px;height:350px;">
     <md-dialog-content>
         <div class="gummy_dialog_title">
             <div class="title">注册</div>
             <span class="glyphicon glyphicon-remove show-connect-close gummy_line_none" aria-hidden="true" ng-click="closeFunction()" style="outline: none;"></span>
         </div>
         <div class="gummy_dialog_content">
-            <from role="form" name="user" ng-submit="userRegister(user.$valid)" class="form-horizontal" novalidate>
+            <from role="form" name="user" class="form-horizontal" novalidate>
                 <div class="row">
                     <div class="col-md-4">
                          <label class="login_label">
@@ -14,7 +14,7 @@
                          </label>
                     </div>
                     <div class="col-md-8">
-                         <input placeholder="请输入用户名" type="text" class="form-control" ng-model="user.account"/>
+                         <input placeholder="请输入用户名" type="text" class="form-control" ng-model="user.username"/>
                      </div>
                  </div>
                  <div class="row">
@@ -61,8 +61,8 @@
                     </div>
                  </div>
                  <div class="row">
-                        <div class="save-result" style="padding:10px 0 0 0;margin:10px 185px">
-                            <button ng-disabled="user.$invalid" type="submit" class="btn btn-info gummy_line_none" >注册</button>
+                        <div class="save-result" style="padding:10px 0 0 0;margin:10px 160px">
+                            <button type="submit" class="btn btn-info gummy_line_none" ng-click="userRegister(user)">注册</button>
                             <button type="button" class="btn btn-warning gummy_line_none" ng-click="closeFunction()" style="margin-left: 15px;">取消</button>
                         </div>
                  </div>
