@@ -4,12 +4,13 @@
  */
 
 var express = require('express'), 
-      routes = require('./routes');
+      routes = require('./routes'),
+      http = require('http'),
+      https = require('https');
 
 var app = module.exports = express.createServer();
 
 // Configuration
-
 app.configure(function(){
   app.set('views', __dirname + '/views');  //设置views文件夹为存放视图文件的目录，即存放模板文件的地方， __dirname为全局变量，存储当前正在执行的脚本所在的目录
   // app.set('view engine', 'jade');   //设置视图模板引擎为jade

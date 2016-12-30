@@ -36,7 +36,7 @@ angular.module('BlankApp')
       }
 
       $scope.judgeMail = function(email){
-      	 var patt1 = new RegExp(/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/);
+              var patt1 = new RegExp(/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/);
               var res = patt1.test(email);
               if(!res){
                 $scope.showError = true;
@@ -51,6 +51,24 @@ angular.module('BlankApp')
        $scope.closeFunction = function(){
         	$mdDialog.cancel();
        }
+
+       $scope.judgeCheckPsd = function(password,checkPassword){
+              if (password && checkPassword) {
+                   if (password !== checkPassword) {
+                     $scope.showError = true;
+                     $scope.errorMsg = "两次密码输入需保持一致";
+                   }
+              }
+      }
+
+       $scope.judgeMail = function(email){
+              var patt1 = new RegExp(/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/);
+              var res = patt1.test(email);
+              if(!res){
+                $scope.showError = true;
+                $scope.errorMsg = "电子邮箱格式不正确"; 
+              } 
+      }
 
        $scope.userRegister = function(user){
              console.info("注册",user);
