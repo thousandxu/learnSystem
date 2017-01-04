@@ -11,5 +11,10 @@ angular.module('BlankApp',[
     		templateUrl: 'views/courses_index.html',
                           controller: 'CourseIndexCtrl'
     	})
+	.state('course',{
+		url: '/course',
+		templateUrl: 'views/courses_center.html',
+		controller: 'CourseCenterCtrl'
+	})
 
 }]);

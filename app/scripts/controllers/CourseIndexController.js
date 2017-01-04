@@ -17,3 +17,8 @@ angular.module('BlankApp')
       }
 
 }])
+.controller('CourseCenterCtrl', ['$rootScope', '$scope', '$http','$location',"constantService",
+      function($rootScope, $scope, $http,$location, constantService){
+
+            
+}])
