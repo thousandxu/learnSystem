@@ -2,10 +2,15 @@
 /*
  * request
  */
-angular.module('nephele')
+angular.module('BlankApp')
 .service('userRegisterStore', ['$resource', function($resource) {
-        return $resource('user/register');
+        return $resource('user/register', {}, {
+            save: {
+                method: "POST"
+            }
+        });
 }])
 .service('userLoginStore', ['$resource', function($resource) {
         return $resource('user/login');
 }])
+;

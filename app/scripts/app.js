@@ -16,5 +16,6 @@ angular.module('BlankApp',[
 		templateUrl: 'views/courses_center.html',
 		controller: 'CourseCenterCtrl'
 	})
+	
 
 }]);
