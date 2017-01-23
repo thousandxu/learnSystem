@@ -11,6 +11,16 @@ angular.module('BlankApp')
         });
 }])
 .service('userLoginStore', ['$resource', function($resource) {
-        return $resource('user/login');
+        return $resource('user/login',{},{
+        	login: {
+                    method: "POST"
+              } 
+        });
+}])
+.service('sessionStore', ['$resource', function($resource) {
+        return $resource('user/getSessionName');
+}])
+.service('logoutStore', ['$resource', function($resource) {
+        return $resource('user/logout');
 }])
 ;

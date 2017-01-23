@@ -4,9 +4,21 @@
 
 // var app = angular.module('BlankApp', []);
 angular.module('BlankApp')
-.controller('TopMenuCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','$mdDialog',
-      function($rootScope, $scope, $http,$location, eventbus, $mdDialog){
-        $scope.iflogin = false;
+.controller('TopMenuCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','$mdDialog','sessionStore','logoutStore',
+      function($rootScope, $scope, $http,$location, eventbus, $mdDialog, sessionStore, logoutStore){
+        $scope.ifLogin = false;
+        var init = function(){
+              sessionStore.get({},function(response){
+                     // console.info(response);
+                     if (response.success) {
+                         $scope.username = response.name;
+                         $scope.ifLogin = true;
+                     } else {
+                         $scope.ifLogin = false;
+                     }
+              });
+        }
+        init();
         //显示用户登录界面
         $scope.showLogin = function(ev){
         	 $mdDialog.show({
@@ -27,11 +39,16 @@ angular.module('BlankApp')
           	    escapeToClose: false,
           	 });
         }
+
+        eventbus.onMsg("login_success",function(v,m){
+              $scope.username = m;
+              $scope.ifLogin = true;
+        },$scope);
 }])
 //用户登录模块
-.controller('UserLoginCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','$mdDialog',
-      function($rootScope, $scope, $http,$location, eventbus, $mdDialog){
-      
+.controller('UserLoginCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','$mdDialog','userLoginStore',
+       function($rootScope, $scope, $http,$location, eventbus, $mdDialog, userLoginStore){
+       
        $scope.closeFunction = function(){
       	       $mdDialog.cancel();
        } 
@@ -46,7 +63,16 @@ angular.module('BlankApp')
        }
 
        $scope.userLogin = function(){
-
+              userLoginStore.login({
+                    username: $scope.username,
+                    password: $scope.password
+              },function(response){
+                    console.info(response);
+                    if(response.success) {
+                            eventbus.emitMsg("login_success",$scope.username);
+                            $mdDialog.cancel();
+                    }
+              })
        }
 }])
 //用户注册模块
@@ -83,7 +109,26 @@ angular.module('BlankApp')
                   email: user.email,
                   mobile: user.mobile
              }, function(data) {
-                
+                  if (data.success) {
+                     eventbus.emitMsg("message",data.data)
+                     $mdDialog.cancel();
+                  } else {
+                     $scope.registerFailed = true;
+                  }
              });
        }
+}])
+//mdToast 的公共事件
+.controller('WarnCtrl', ['$scope', '$mdToast', 'eventbus', function($scope, $mdToast, eventbus) {
+
+       eventbus.onMsg('message', function(event, text) {
+              $mdToast.show(
+                    $mdToast.simple()
+                    .content(text)
+                    .position('top right')
+                    .action('OK')
+                    .hideDelay(1000)
+                    //.parent(angular.element(document).find('.maincontent'))
+              );
+       });
 }])

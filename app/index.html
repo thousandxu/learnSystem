@@ -21,11 +21,29 @@
             <img src="./images/logo.png" class="logo" id="logo"/>
             <a class="navbar-brand" href="#" style="color:#FFFFFF;">學云微课堂</a>
         </div>
-        <div>
-            <form class="navbar-form navbar-right" role="search">
-                <a class="gummy_btn_a" ng-click="showLogin($event)">登录</a>
-                <a class="gummy_btn_a" ng-click="showRegister($event)">注册</a>
-            </form>
+        <div ng-hide="ifLogin">
+              <form class="navbar-form navbar-right" role="search">
+                    <a class="gummy_btn_a" ng-click="showLogin($event)">登录</a>
+                    <a class="gummy_btn_a" ng-click="showRegister($event)">注册</a>
+              </form>
+        </div>
+        <div ng-if="ifLogin" class="nav_right">
+              <div class="btn-group" style="display: inline-block;">
+                     <button type="button" class="btn btn-gummy dropdown-toggle" data-toggle="dropdown">
+                          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                          <span ng-bind="username"></span>
+                          <span class="caret"></span>
+                     </button>
+                     <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation" class="dropdown-header">用户管理</li>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="#" ng-click="revisepsd($event)">修改密码</a>
+                        </li>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="#" ng-click="logout()">用户注销</a>
+                        </li>
+                     </ul>
+              </div>
         </div>
       </div>
   </nav>

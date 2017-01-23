@@ -1,36 +1,54 @@
 .container{
-  width: 1280px;
-  margin:0 auto;
+    width: 1280px;
+    margin:0 auto;
 }
 .gummy_nav{
-  margin-bottom: 0;
-  background-color: #1f384d;
+    margin-bottom: 0;
+    background-color: #1f384d;
 }
 .logo{
-  width: 80px;
-  height: 50px;
-  display: inline-block;
-  float: left;
+    width: 80px;
+    height: 50px;
+    display: inline-block;
+    float: left;
 }
 .gummy_btn_a{
-  color:#FFFFFF;
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-  touch-action: manipulation;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-image: none;
+    color:#FFFFFF;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+}
+.nav_right{
+    display: inline-block;
+    float: right;
+    line-height: 50px;
+}
+.btn-gummy{
+    color: #fff;
+    background-color: #1f384d;
+    border-color: #1f384d;
+}
+.btn-gummy:hover, 
+.btn-gummy.focus, 
+.btn-gummy.active, 
+.open>.dropdown-toggle.btn-gummy {
+    color: #fff;
+    background-color: #1f384d;
+    border-color: #1f384d;
 }
 .gummy_line_none{
    outline: none;
@@ -90,7 +108,7 @@
     border-color: rgba(237, 85, 101, 0.8) transparent transparent;
 }
 .maincontent{
-  width: 100%;
+    width: 100%;
 }
 .gummy_carousel{
     width: 100%;

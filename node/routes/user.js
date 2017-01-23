@@ -34,8 +34,9 @@ router.post('/register', function(req, res, next) {
 
 //用户登录
 router.post('/login', function(req,res,next) {
-	var usernam = req.body.username;
+	var username = req.body.username;
 	var password = req.body.password;
+	req.session.username = username;
 	userDao.userLogin(username,password,function(err, result) {
 		if(err){
 	              console.error("login--%s",err.stack);
@@ -49,6 +50,23 @@ router.post('/login', function(req,res,next) {
              }
 	});
 });
+
+router.get('/getSessionName', function(req,res,next){
+        console.log("/getSessionName");
+        if(req.session.username){
+             res.json(({success:true, name:req.session.username}));
+        }else{
+             res.json(({success:false}));
+        }
+});
+
+router.get('/logout', function(req, res, next) {
+	if (req.session){
+              req.session.destroy();
+	}
+	res.json(success);
+});
+
 
 
 module.exports = router;

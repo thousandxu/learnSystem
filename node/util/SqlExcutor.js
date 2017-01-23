@@ -13,7 +13,7 @@ var pool  = mysql.createPool(settings);
 
 exports.excute = function(sql,option,callback){
 	pool.getConnection(function(err,connection){
-		if(err){console.log("[get mysql connection error]:"+err.stack);return;}
+		if(err){console.log("[get mysql connection error]:"+err.stack);callback(err,null);return;}
 		connection.query(sql,option,function(err,result){
 			if(err){console.log("[excute mysql error]:"+err.stack);}
 			connection.release();

@@ -9,6 +9,7 @@ var express = require('express'),
       https = require('https'),
       fs = require('fs');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 // var app = module.exports = express.createServer();
 var app = express();
 var domain = require('domain');
@@ -22,7 +23,7 @@ app.use(express.static('../app'));
 
 // app.use(express.methodOverride()); //connect内建的中间件,协助处理POST请求,伪装PUT,DELETE和其他HTTP方法
 app.use(express.static(__dirname + '/public'));  //connect内建的中间件,将根目录下的public文件夹作为存放静态文件的目录
-
+app.use(session({secret:"test",saveUninitialized:true,resave:true}));
 
 d.on('error', function(err) {
   console.error(err.stack);
