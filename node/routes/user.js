@@ -16,14 +16,14 @@ router.post('/register', function(req, res, next) {
 	var email = req.body.email;
 	var mobile = req.body.mobile;
 	var create_time = new Date();
-	console.log("app/topThroughtput:username-->%s,password-->%s,email-->%s,mobile-->%s,create_time-->%s", username, password, email, mobile, create_time);
+	console.log("user/register:username-->%s,password-->%s,email-->%s,mobile-->%s,create_time-->%s", username, password, email, mobile, create_time);
        userDao.createUser(username, password, email, mobile, create_time, function(err,result){
              if(err){
 	              console.error("register--%s",err.stack);
 	              return res.status(500).json({"error":"服务器内部错误","success":false});
              }
              if(result.affectedRows > 0) {
-	              console.log('5');
+	              console.log('register success');
 	              res.json({"success": true,"data": "注册成功"});
              } else {
 	              console.error("register--affectrows:%s",affectedRows);

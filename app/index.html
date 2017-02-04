@@ -3,7 +3,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>學云微课堂</title>
+    <!-- <title>學云微课堂</title> -->
+    <title>百度一下,你就知道</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- user-scalable=no 禁用缩放功能 -->
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="styles/font-awesome/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="styles/css/index.css"/>
     <link rel="stylesheet" href="styles/css/course_index.css"/>
+    <link rel="stylesheet" href="styles/css/user.css"/>
     <link rel="stylesheet" href="styles/css/animate.css">
 </head>
 <body ng-app="BlankApp" ng-cloak style="z-index:1;">
@@ -36,6 +38,9 @@
                      </button>
                      <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
                         <li role="presentation" class="dropdown-header">用户管理</li>
+                        <li role="presentation">
+                            <a ui-sref="user">用户信息</a>
+                        </li>
                         <li role="presentation">
                             <a role="menuitem" tabindex="-1" href="#" ng-click="revisepsd($event)">修改密码</a>
                         </li>
@@ -68,6 +73,7 @@
   <!-- controllers -->
   <script src="scripts/controllers/TopMenuController.js"></script>
   <script src="scripts/controllers/CourseIndexController.js"></script>
+  <script src="scripts/controllers/UserController.js"></script>
   <!-- directives -->
   <script src="scripts/directives/msgFactory.js"></script>
   <!-- services -->

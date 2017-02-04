@@ -1,0 +1,30 @@
+/*user_index css*/
+.user_wrap {
+    background-color: #f7f7f7;
+}
+.user_wrap_left{
+    float: left;
+    width: 20%;
+}
+.user_wrap_left_top{
+    width: 100%;
+    height: 240px;
+}
+.head_portrait_top{
+    width: 100%;
+    height: 100px;
+    background: #000000;
+}
+.head_portrait {
+    position: absolute;
+    top: 23%;
+    left: 32%;
+}
+.user_wrap_right{
+    float: left;
+    width: 80%;
+}
+.user_wrap_right_content{
+    width:100%;
+    height: calc(100vh - 55px);
+}
