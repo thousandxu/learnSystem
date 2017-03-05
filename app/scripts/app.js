@@ -16,6 +16,11 @@ angular.module('BlankApp',[
 		templateUrl: 'views/courses_center.html',
 		controller: 'CourseCenterCtrl'
 	})
+	.state('bbs',{
+             url: '/bbs',
+		templateUrl: 'views/bbs/bbsIndex.html',
+		controller: 'BBSIndexCtrl'
+	})
 	.state('user',{
 		url: '/user',
 		templateUrl: 'views/userInfo_index.html',
