@@ -17,6 +17,13 @@ angular.module('BlankApp')
               } 
         });
 }])
+.service('revisePsdStore', ['$resource', function($resource) {
+        return $resource('user/revisepsd',{},{
+             save: {
+                    method: "POST"
+              } 
+        });
+}])
 .service('sessionStore', ['$resource', function($resource) {
         return $resource('user/getSessionName');
 }])

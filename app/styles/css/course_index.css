@@ -168,8 +168,11 @@
 .course_center_courses{
     background-color: #f7f7f7;
     width: 100%;
-    height: 600px;
+    height: auto;
     padding-top: 50px;
+}
+.course_center_courses .row {
+    margin-bottom: 65px;
 }
 .course_courses_title{
     text-align: center;
@@ -319,4 +322,11 @@
     display: block;
     height: 100%;
     width: 100%;
+}
+/*趣味学习--代码实践*/
+.courses-center-practice {
+    background-color: #ffffff;
+    width: 100%;
+    height: 350px;
+    padding-top: 20px;
 }

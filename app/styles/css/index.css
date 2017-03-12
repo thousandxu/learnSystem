@@ -53,23 +53,41 @@
 .gummy_line_none{
    outline: none;
 }
-.gummy_dialog_title{
+.gummy-dialog-title {
+    overflow: hidden;
     width: 100%;
-    display: inline-block;
-    height: 32px;
-    line-height: 32px;
+    height: 40px;
+    background: #1f384d;
+    padding: 10px;
 }
-.gummy_dialog_title .title{
-    display: inline-block;
-    float: left;
-    margin-left: 10px;
-    font-size: 16px;
+.gummy-dialog-title span{
+    color: #FFFFFF;
 }
-.gummy_dialog_title span{
-    display: inline-block;
-    float: right;
-    margin: 6px;
+.gummy-dialog-title i{
+    color: #FFFFFF;
+    position: absolute;
+    right: 10px;
+    top: 12px;
+     -webkit-transition: transform 1s;
+    -moz-transition: transform 1s;
+    -o-transition: transform 1s;
 }
+.gummy-dialog-title i:hover{
+    transform: rotate(180deg);
+}
+.gummy-dialog-content {
+    position: relative;
+    height: 130px;
+    margin-top: 23px;
+}
+.gummy-dialog-content .row{
+    margin: 0;
+}
+.gummy-dialog-content .row:not(:first-child) {
+    margin-top: 5px;
+}
+
+
 .gummy_dialog_content{
     width: calc(100% - 60px);
     margin: 0 30px;

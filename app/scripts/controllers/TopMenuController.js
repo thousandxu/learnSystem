@@ -23,7 +23,7 @@ angular.module('BlankApp')
         $scope.showLogin = function(ev){
         	 $mdDialog.show({
         	    controller: 'UserLoginCtrl',
-        	    templateUrl: 'views/userLogin.html',
+        	    templateUrl: 'views/dialog/userLogin.html',
         	    parent: angular.element(document.body),
         	    targetEvent: ev,
         	    escapeToClose: false,
@@ -32,12 +32,22 @@ angular.module('BlankApp')
         //显示用户注册界面
        $scope.showRegister = function(ev){
           	 $mdDialog.show({
-          	    controller: 'UserRegisterCtrl',
-          	    templateUrl: 'views/userRegister.html',
-          	    parent: angular.element(document.body),
-          	    targetEvent: ev,
-          	    escapeToClose: false,
-          	 });
+                controller: 'UserRegisterCtrl',
+                templateUrl: 'views/dialog/userRegister.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                escapeToClose: false,
+             });
+        }
+        //
+        $scope.revisepsd = function(ev) {
+              $mdDialog.show({
+                controller: 'RevisePsdCtrl',
+                templateUrl: 'views/dialog/userChangePsd.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                escapeToClose: false,
+             });
         }
 
         eventbus.onMsg("login_success",function(v,m){
@@ -116,6 +126,12 @@ angular.module('BlankApp')
                      $scope.registerFailed = true;
                   }
              });
+       }
+}])
+//修改密码
+.controller('RevisePsdCtrl',['$scope','$mdDialog','revisePsdStore', function($scope, $mdDialog,revisePsdStore) {
+       $scope.close = function(){
+          $mdDialog.cancel();
        }
 }])
 //mdToast 的公共事件

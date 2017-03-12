@@ -5,8 +5,8 @@ var settings = {
 	  connectionLimit : 10,
 	  host: '127.0.0.1',
 	  user: 'root',
-	  // password: 'password',
-	  password: '@qian@1000',
+	  password: 'password',
+	  // password: '@qian@1000',
 	  database:'learn_system',
 	  port: 3306
       };
