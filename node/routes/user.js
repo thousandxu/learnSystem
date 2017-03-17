@@ -52,7 +52,7 @@ router.post('/login', function(req,res,next) {
 	});
 });
 //获取用户详细信息
-router.post('/getUserInfo', function(req,res,next) {
+router.get('/getUserInfo', function(req,res,next) {
         var username = req.session.username;
         userDao.userLogin(username, function(err, result) {
             if(err){
@@ -66,6 +66,26 @@ router.post('/getUserInfo', function(req,res,next) {
                  }
         });
 });
+//更新用户信息
+router.get('/updateUserInfo', function(req, res, next) {
+       var user = req.query.user;
+       var userId = req.session.userId;
+       var username = user.username;
+       var email = user.email;
+       var mobile = user.mobile;
+       var address = user.address;
+       var birth = user.birth;
+       var university = user.university;
+       userDao.updateUsre(userId,username,email,mobile,address,birth,university, function(err, result) {
+              if (err) {
+                     console.error("login--%s",err.stack);
+                     return res.status(500).json({"error":"服务器内部错误","success":false});
+              } 
+              if (result.affectedRows > 0) {
+                     res.status(200).json({"success":true,"data":"修改成功"});
+              }
+       });
+})
 //修改用户密码
 router.post('/revisepsd', function(req,res,next) {
         var username = req.session.username;

@@ -1,0 +1,47 @@
+<md-dialog style="width:500px;height:300px;">
+    <md-dialog-content>
+         <div class="gummy-dialog-title">
+            <span>修改密码</span>
+            <i class="fa fa-close fa-lg" aria-hidden="true" ng-click="close()"></i>
+        </div>
+        <div class="gummy-dialog-content" style="position:relative;height: 130px;">
+            <div class="row">
+              <div class="col-md-4">
+                    <label style="line-height: 34px;">旧密码:</label>
+              </div>
+              <div class="col-md-8">
+                    <input placeholder="请输入用户旧密码" id="oldPsd" type="password" class="form-control" ng-model="oldPsd" ng-blur="judegePsd($event,oldPsd)" ng-focus="reset()"/>
+                    <div class="dbname_error_msg" aria-hidden="true" ng-show="showError.psdError" style="left:25px;width: 150px;">
+                         <span ng-bind="errorMsg" class="ng-binding"></span>
+                    </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 5px;">
+              <div class="col-md-4">
+                    <label style="line-height: 34px;">新密码:</label>
+              </div>
+              <div class="col-md-8">
+                    <input placeholder="请输入用户新密码" id="newPsd" type="password" class="form-control" ng-model="newPsd" ng-blur="judegePsd($event,newPsd)" ng-focus="reset()"/>
+                    <div class="dbname_error_msg" aria-hidden="true" ng-show="showError.newpsdError" style="left:25px;width: 160px;">
+                         <span ng-bind="errorMsg" class="ng-binding"></span>
+                    </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 5px;">
+              <div class="col-md-4">
+                    <label style="line-height: 34px;">确认新密码:</label>
+              </div>
+              <div class="col-md-8">
+                    <input placeholder="请确认用户新密码" type="password" class="form-control" ng-model="ChecknewPsd" ng-blur="checkPsd(ChecknewPsd)" ng-focus="reset()"/>
+                    <div class="dbname_error_msg" aria-hidden="true" ng-show="showError.checkError" style="left:25px;width: 160px;">
+                         <span ng-bind="checkMsg" class="ng-binding"></span>
+                    </div>
+              </div>
+            </div>
+        </div>
+         <div class="save-result" style="margin: 10px">
+            <button type="button" class="btn btn-info" ng-click="saveUserPsd()">保存</button>
+            <button type="button" class="btn btn-warning" ng-click="close()">取消</button>
+        </div>
+    </md-dialog-content>
+</md-dialog>

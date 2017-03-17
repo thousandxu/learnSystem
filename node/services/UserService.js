@@ -26,8 +26,8 @@ function UserService(){
 		sqlExcutor.excute(sql, option, callback);
 	}
 	//更新用户信息
-	this.updateUsre = function(id, username, address, birth, university, portrait, callback) {
-		var option = [id, username, address, birth, university, portrait];
+	this.updateUsre = function(id, username, email, mobile, address, birth, university, callback) {
+		var option = [id, username, address, birth, university];
 		var sql = "";
 		sqlExcutor.excute(sql, option, callback);
 	}
