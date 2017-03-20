@@ -31,6 +31,12 @@ function UserService(){
 		var sql = "";
 		sqlExcutor.excute(sql, option, callback);
 	}
+	//查看用户学习的所有课程
+	this.selectUserCourse = function(userId, callback) {
+		var option = [id];
+		var sql = "select * from userCourse where userId=?";
+		sqlExcutor.excute(sql, option, callback);
+	}
 
 
 

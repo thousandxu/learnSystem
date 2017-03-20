@@ -17,7 +17,7 @@ angular.module('BlankApp')
               } 
         });
 }])
-.service('sessionStore', ['$resource', function($resource) {
+.service('getUserInfo', ['$resource', function($resource) {
         return $resource('user/getUserInfo');
 }])
 .service('revisePsdStore', ['$resource', function($resource) {
@@ -26,6 +26,15 @@ angular.module('BlankApp')
                     method: "POST"
               } 
         });
+}])
+.service('getCourse', ['$resource', function($resource) {
+        return $resource('course/getCourse');
+}])
+.service('getChapters', ['$resource', function($resource) {
+        return $resource('course/getChapters');
+}])
+.service('courseSession', ['$resource', function($resource) {
+        return $resource('course/getSessionCourseId');
 }])
 .service('sessionStore', ['$resource', function($resource) {
         return $resource('user/getSessionName');

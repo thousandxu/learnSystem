@@ -1,8 +1,5 @@
 'use strict';
 
-/* menuController */
-
-// var app = angular.module('BlankApp', []);
 angular.module('BlankApp')
 .controller('UserInfoIndexCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','$mdDialog',
        function($rootScope, $scope, $http,$location, eventbus, $mdDialog){
@@ -32,9 +29,13 @@ angular.module('BlankApp')
 
 }])
 //用户信息设置 
-.controller('UserSettingCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','$mdDialog',
-       function($rootScope, $scope, $http,$location, eventbus, $mdDialog){
-        
+.controller('UserSettingCtrl', ['$rootScope', '$scope', '$http','eventbus','$mdDialog','getUserInfo',
+       function($rootScope, $scope, $http, eventbus, $mdDialog,getUserInfo){
+        var init = function() {
+              getUserInfo.get({}, function(resp) {
+                     console.log(resp);
+              });
+        }
        
 }])
 //用户学习课程

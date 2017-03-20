@@ -16,8 +16,16 @@ angular.module('BlankApp',[
 		templateUrl: 'views/courses_center.html',
 		controller: 'CourseCenterCtrl'
 	})
+	.state('courseDetail',{
+		params: {
+	                    "courseId": null
+	              },
+		url: '/courseDetail',
+		templateUrl: 'views/course/courseDetail.html',
+		controller: 'CourseDetailCtrl'
+	})
 	.state('bbs',{
-             url: '/bbs',
+                           url: '/bbs',
 		templateUrl: 'views/bbs/bbsIndex.html',
 		controller: 'BBSIndexCtrl'
 	})

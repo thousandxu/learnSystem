@@ -1,0 +1,53 @@
+<div>
+       <!--  <div class="bb-container">
+               <div class="row">
+                     <div class="col-md-3"></div>
+                     <div class="col-md-6"></div>
+                     <div class="col-md-3"></div>
+               </div>
+        </div> -->
+       <div class="container" style="padding: 30px 0;">
+              <div class="row">
+                     <div class="col-md-3" style="height: 230px;">
+                           <div class="bb">
+                               <div>css</div>
+                           </div>
+                     </div>
+              </div>
+       </div>
+       <section class="course_chapter">
+              <div class="container row">
+                     <div class="col-md-8">
+                            <div class="chapter_header">
+                                  <ol class="breadcrumb">
+                                      <li><a href="#">课程首页</a></li>
+                                      <li><a href="#" ng-bind="nowCourse.courseName"></a></li>
+                                  </ol>
+                                  <button class="btn btn-sm btn-success">学习小组</button>
+                            </div>
+                            <div class="chapter_container">
+                                   <div ng-repeat="item in videoChapter" style="position: relative;">
+                                         <div class="node" ng-class="{nodeConnect: $index > 0}"></div>
+                                         <div class="chapter">
+                                              <span ng-bind="item.chapterName"></span>
+                                         </div>
+                                   </div>
+                            </div>
+                     </div>
+                     <div class="col-md-4">
+                            <div class="chapter-userBox">
+                                  <div class="user-imgBox"></div>
+                                  <div class="chapter-progress">
+                                          <span>课程进度</span>
+                                          <span>0/5</span>
+                                  </div>
+                                  <div class="chapter-userset-box">
+                                          <button class="gummy_arc_btn">个人主页</button>
+                                  </div>
+                            </div>
+                            
+                     </div>
+              </div>
+       </section>
+
+</div>

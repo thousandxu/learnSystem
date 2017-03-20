@@ -55,15 +55,15 @@ router.post('/login', function(req,res,next) {
 router.get('/getUserInfo', function(req,res,next) {
         var username = req.session.username;
         userDao.userLogin(username, function(err, result) {
-            if(err){
-                      console.error("login--%s",err.stack);
-                      return res.status(500).json({"error":"服务器内部错误","success":false});
-                 }
-                 if (result.length > 0) {
-                           res.status(200).json({"success":true,"data":result});
-                 } else {
-                           res.status(200).json({"success":false,"error":"用户不存在"});
-                 }
+              if(err){
+                    console.error("login--%s",err.stack);
+                    return res.status(500).json({"error":"服务器内部错误","success":false});
+              }
+              if (result.length > 0) {
+                         res.status(200).json({"success":true,"data":result});
+              } else {
+                         res.status(200).json({"success":false,"error":"用户不存在"});
+              }
         });
 });
 //更新用户信息
@@ -105,7 +105,7 @@ router.post('/revisepsd', function(req,res,next) {
 });
 //获取ssession中的用户名
 router.get('/getSessionName', function(req,res,next){
-        console.log("/getSessionName");
+        // console.log("/getSessionName");
         if(req.session.username){
              res.json(({success:true, name:req.session.username}));
         }else{

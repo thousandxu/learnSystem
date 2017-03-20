@@ -39,9 +39,11 @@ d.run(function() {
   });
   // Routes
   var userRouter = require("./routes/user.js");
+  var courseRouter = require("./routes/course.js");
 
   // app.get('/', routes.index);   //路由控制器,当用户访问默认路径 / 时,由routes下的index.js文件处理
   app.use('/user', userRouter); 
+  app.use('/course', courseRouter); 
 
   //exception handler
   app.use(function(err, req, res, next) {
