@@ -1,6 +1,6 @@
 <div>
 	<div class="gummy_dialog_content">
-            <from role="form" name="user" class="form-horizontal" novalidate>
+            <from role="form" class="form-horizontal" novalidate>
                 <div class="row">
                     <div class="col-md-4">
                          <label class="login_label">
@@ -9,7 +9,7 @@
                          </label>
                     </div>
                     <div class="col-md-8">
-                         <input placeholder="请输入用户名" type="text" class="form-control" ng-model="user.username"/>
+                         <input placeholder="请输入用户名" type="text" class="form-control" ng-model="nowUser.username"/>
                      </div>
                  </div>
                  <div class="row">
@@ -20,7 +20,7 @@
                         </label>
                     </div>
                     <div class="col-md-8">
-                         <input placeholder="请输入用户邮箱" type="email" class="form-control" ng-model="user.email"/>
+                         <input placeholder="请输入用户邮箱" type="email" class="form-control" ng-model="nowUser.email"/>
                     </div>
                  </div>
                  <div class="row">
@@ -30,7 +30,7 @@
                          </label>
                     </div>
                     <div class="col-md-8">
-                         <input placeholder="请输入手机号" type="text" class="form-control" ng-model="user.mobile"/>
+                         <input placeholder="请输入手机号" type="text" class="form-control" ng-model="nowUser.mobile"/>
                     </div>
                  </div>
                  <div class="row">
@@ -40,7 +40,7 @@
                          </label>
                     </div>
                     <div class="col-md-8">
-                         <input placeholder="请输入手机号" type="text" class="form-control" ng-model="user.mobile"/>
+                         <input placeholder="请输入手机号" type="text" class="form-control" ng-model="nowUser.birth"/>
                     </div>
                  </div>
                  <div class="row">
@@ -50,7 +50,7 @@
                          </label>
                     </div>
                     <div class="col-md-8">
-                         <input placeholder="请输入手机号" type="text" class="form-control" ng-model="user.mobile"/>
+                         <input placeholder="现居住地址" type="text" class="form-control" ng-model="nowUser.address"/>
                     </div>
                  </div>
                  <div class="row">
@@ -60,44 +60,13 @@
                          </label>
                     </div>
                     <div class="col-md-8">
-                         <input placeholder="请输入手机号" type="text" class="form-control" ng-model="user.mobile"/>
+                         <input placeholder="就读大学" type="text" class="form-control" ng-model="nowUser.university"/>
                     </div>
+                 </div>
+                 <div class="row">
+                    <button class="btn btn-info" ng-click="saveUser()">保存</button>
+                    <button class="btn btn-warn" ng-click="resetUser()">重置</button>
                  </div>
             </from>
-            <form>
-            	    <div class="row">
-                    <div class="col-md-4">
-                         <label class="login_label">
-                            旧密码
-                            <span style="color: red;">*</span>
-                         </label>
-                    </div>
-                    <div class="col-md-8">
-                         <input placeholder="请输入用户密码" type="password" class="form-control" ng-model="user.password" minlength="6" />
-                    </div>
-                 </div>
-                 <div class="row">
-                    <div class="col-md-4">
-                         <label class="login_label">
-                            新密码
-                            <span style="color: red;">*</span>
-                         </label>
-                    </div>
-                    <div class="col-md-8">
-                         <input placeholder="请输入用户密码" type="password" class="form-control" ng-model="user.password" minlength="6" />
-                    </div>
-                 </div>
-                 <div class="row">
-                    <div class="col-md-4">
-                         <label class="login_label">
-                            确认新密码 
-                            <span style="color: red;">*</span>
-                         </label>
-                    </div>
-                    <div class="col-md-8">
-                         <input placeholder="确认用户密码,密码需保持一致" type="password" class="form-control" ng-model="user.checkPassword" minlength="6"/>
-                    </div>
-                 </div>
-            </form>
         </div>
 </div>

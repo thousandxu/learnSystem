@@ -43,7 +43,7 @@ router.post('/login', function(req,res,next) {
 	              return res.status(500).json({"error":"服务器内部错误","success":false});
              }
              if (result.length > 0) {
-             	       console.log("登陆成功", result);
+             	       // console.log("登陆成功", result);
                      req.session.userId = result.id;
              	       res.status(200).json({"success":true,"data":"登陆成功"});
              } else {
@@ -54,7 +54,7 @@ router.post('/login', function(req,res,next) {
 //获取用户详细信息
 router.get('/getUserInfo', function(req,res,next) {
         var username = req.session.username;
-        userDao.userLogin(username, function(err, result) {
+        userDao.selectUser(username, function(err, result) {
               if(err){
                     console.error("login--%s",err.stack);
                     return res.status(500).json({"error":"服务器内部错误","success":false});
@@ -67,16 +67,17 @@ router.get('/getUserInfo', function(req,res,next) {
         });
 });
 //更新用户信息
-router.get('/updateUserInfo', function(req, res, next) {
-       var user = req.query.user;
-       var userId = req.session.userId;
+router.post('/updateUserInfo', function(req, res, next) {
+       var user = req.body.user;
+       console.log(user);
+       var userId = user.id;
        var username = user.username;
        var email = user.email;
        var mobile = user.mobile;
        var address = user.address;
        var birth = user.birth;
        var university = user.university;
-       userDao.updateUsre(userId,username,email,mobile,address,birth,university, function(err, result) {
+       userDao.updateUser(userId,username,email,mobile,address,birth,university, function(err, result) {
               if (err) {
                      console.error("login--%s",err.stack);
                      return res.status(500).json({"error":"服务器内部错误","success":false});

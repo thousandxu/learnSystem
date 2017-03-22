@@ -19,6 +19,11 @@ function CourseService(){
               var sql = "insert into userCourse(userId, courseId, type, chapterId, finish) values(?,?,?,?,?)";
               sqlExcutor.excute(sql, option, callback);
        }
+       this.checkCourse = function(courseId, userId, callback) {
+              var option = [userId, courseId, type];
+              var sql = "select * from userCourse where userId=? and courseId=?";
+              sqlExcutor.excute(sql, option, callback);
+       }
        //获取用户课程学习进度
        this.selectUserCourse = function(userId, courseId, type, callback) {
               var option = [userId, courseId, type];

@@ -26,9 +26,9 @@ function UserService(){
 		sqlExcutor.excute(sql, option, callback);
 	}
 	//更新用户信息
-	this.updateUsre = function(id, username, email, mobile, address, birth, university, callback) {
-		var option = [id, username, address, birth, university];
-		var sql = "";
+	this.updateUser = function(id, username, email, mobile, address, birth, university, callback) {
+		var option = [username, email, mobile, address, birth, university, id];
+		var sql = "update users set username=?,email=?,mobile=?,address=?,birth=?,university=? where id=?";
 		sqlExcutor.excute(sql, option, callback);
 	}
 	//查看用户学习的所有课程

@@ -26,6 +26,23 @@ router.get('/getCourse', function(req, res, next) {
              }
        });
 });
+//判断用户是否已经开始该门课程的学习
+router.get('/userCourseCheck', function(req, res, next) {
+       var courseId = req.query.courseId;
+       var userId = req.session.userId;
+       console.log("courses/userCourseCheck:courseId-->%s,userId-->%s", courseId,userId);
+       courseDao.checkCourse(courseId,userId, function(err,result){
+             if(err){
+                  console.error("register--%s",err.stack);
+                  return res.status(500).json({"error":"服务器内部错误","success":false});
+             }
+             if(result.length > 0) {
+                  res.json({"success": true,"learn": true});
+             } else {
+                  res.json({"success": true,"learn": false});
+             }
+       });
+});
 //获取课程的所有章节
 router.get('/getChapters', function(req, res, next) {
        var courseId = req.query.courseId;

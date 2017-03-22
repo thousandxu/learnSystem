@@ -29,12 +29,23 @@ angular.module('BlankApp')
 
 }])
 //用户信息设置 
-.controller('UserSettingCtrl', ['$rootScope', '$scope', '$http','eventbus','$mdDialog','getUserInfo',
-       function($rootScope, $scope, $http, eventbus, $mdDialog,getUserInfo){
+.controller('UserSettingCtrl', ['$rootScope', '$scope', '$http','eventbus','$mdDialog','getUserInfo','updateUserInfo',
+       function($rootScope, $scope, $http, eventbus, $mdDialog, getUserInfo, updateUserInfo){
         var init = function() {
               getUserInfo.get({}, function(resp) {
                      console.log(resp);
+                     $scope.nowUser = resp.data[0];
               });
+        }
+        init();
+
+        $scope.saveUser = function() {
+              console.log($scope.nowUser);
+              updateUserInfo.save({
+                   user: $scope.nowUser
+              }, function(resp) {
+                   console.log(resp);
+              })
         }
        
 }])

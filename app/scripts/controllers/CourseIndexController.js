@@ -25,16 +25,21 @@ angular.module('BlankApp')
             
 }])
 //点击查看单个课程章节的Controller
-.controller('CourseDetailCtrl', ['$rootScope', '$scope', '$http','$location','$stateParams','getCourse','getChapters','courseSession',
-      function($rootScope, $scope, $http,$location, $stateParams,getCourse,getChapters,courseSession){
+.controller('CourseDetailCtrl', ['$rootScope', '$scope', '$http','$location','$stateParams','getCourse','getChapters','courseSession','checkUserCourse',
+      function($rootScope, $scope, $http,$location, $stateParams,getCourse,getChapters,courseSession,checkUserCourse){
       console.log('courseId', $stateParams.courseId);
       var initData = function() {
             getCourse.get({
                  courseId: $scope.courseId
             }, function(resp) {
-                 console.log(resp);
+                 // console.log(resp);
                  $scope.nowCourse = resp.data;
             });
+            checkUserCourse.get({
+                 courseId: $scope.courseId
+            }, function(resp) {
+                 console.log(resp);
+            })
             $scope.videoChapter = [];
             $scope.wordChapter = [];
             getChapters.get({
