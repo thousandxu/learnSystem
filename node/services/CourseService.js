@@ -14,13 +14,14 @@ function CourseService(){
               sqlExcutor.excute(sql, option, callback);
        };
        //用户学习的课程
-       this.insertUserCourse = function(userId, courseId, type, chapterId, finish, callback) {
+       this.insertUserCourse = function(courseId, userId, type, chapterId, finish, callback) {
               var option = [userId, courseId, type, chapterId, finish];
               var sql = "insert into userCourse(userId, courseId, type, chapterId, finish) values(?,?,?,?,?)";
               sqlExcutor.excute(sql, option, callback);
        }
+       //
        this.checkCourse = function(courseId, userId, callback) {
-              var option = [userId, courseId, type];
+              var option = [userId, courseId];
               var sql = "select * from userCourse where userId=? and courseId=?";
               sqlExcutor.excute(sql, option, callback);
        }
@@ -36,9 +37,16 @@ function CourseService(){
               var sql = "update userCourse set chapterId=? where userId=? and courseId=? and type=?";
               sqlExcutor.excute(sql, option, callback);
        }
+       this.finishCourse = function(userId, courseId, type, callback) {
+              var option = [userId, courseId, type];
+              var sql = "update userCourse set finish=1 where userId=? and courseId=? and type=?";
+              sqlExcutor.excute(sql, option, callback);
+       }
        //用户学习记录
        this.insertLearnRecord = function(userId, courseId, type, chapterId, time, callback) {
-
+              var option = [userId, courseId, type, chapterId, time];
+              var sql = "insert into learnRecord(userId, courseId, type, chapterId, learnTime) values(?,?,?,?,?)";
+              sqlExcutor.excute(sql, option, callback);
        }
 
 

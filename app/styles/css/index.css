@@ -86,6 +86,11 @@
 .gummy-dialog-content .row:not(:first-child) {
     margin-top: 5px;
 }
+.gummy-dialog-vedio {
+    position: relative;
+    margin: 0;
+    height: 660px;
+}
 
 
 .gummy_dialog_content{

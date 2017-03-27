@@ -29,11 +29,18 @@
                                   <button class="btn btn-sm btn-success">学习小组</button>
                             </div>
                             <div class="chapter_container">
-                                   <div ng-repeat="item in videoChapter" style="position: relative;">
+                                   <div ng-repeat="item in chapterList" style="position: relative;" ng-if="hasLearn">
                                          <div class="node" ng-class="{nodeConnect: $index > 0}"></div>
                                          <div class="chapter">
                                               <span ng-bind="item.chapterName"></span>
+                                              <button class="btn btn-success" ng-click="learnChapter(item, $event)" ng-if="item.learnShow">学习</button>
+                                              <button class="btn btn-success" ng-if="!item.learnShow" ng-disabled="!item.learnShow">
+                                                    <i class="fa fa-lock fa-lg"></i>
+                                              </button>
                                          </div>
+                                   </div>
+                                   <div ng-if="!hasLearn">
+                                          <button class="btn btn-success btn-lg" ng-click="studyCourse()">study</button>
                                    </div>
                             </div>
                      </div>
@@ -42,7 +49,7 @@
                                   <div class="user-imgBox"></div>
                                   <div class="chapter-progress">
                                           <span>课程进度</span>
-                                          <span>0/5</span>
+                                          <span>{{nowProgress}}/{{chapterList.length}}</span>
                                   </div>
                                   <div class="chapter-userset-box">
                                           <button class="gummy_arc_btn">个人主页</button>

@@ -22,24 +22,41 @@ router.get('/getCourse', function(req, res, next) {
              if(result.length > 0) {
                   res.json({"success": true,"data": result});
              } else {
-                  return res.status(500).json({"error":"服务器内部错误","success":false});
+                  res.json({"success": false,"data": []});
              }
        });
 });
 //判断用户是否已经开始该门课程的学习
 router.get('/userCourseCheck', function(req, res, next) {
        var courseId = req.query.courseId;
+       var type = req.query.type;
        var userId = req.session.userId;
-       console.log("courses/userCourseCheck:courseId-->%s,userId-->%s", courseId,userId);
-       courseDao.checkCourse(courseId,userId, function(err,result){
+       console.log("courses/userCourseCheck:courseId-->%s,userId-->%s,type-->%s", courseId, userId, type);
+       courseDao.selectUserCourse(userId, courseId, type, function(err,result){
              if(err){
                   console.error("register--%s",err.stack);
                   return res.status(500).json({"error":"服务器内部错误","success":false});
              }
              if(result.length > 0) {
-                  res.json({"success": true,"learn": true});
+                  res.json({"success": true,"learn": true, "data": result});
              } else {
                   res.json({"success": true,"learn": false});
+             }
+       });
+});
+router.get('/studyCourse', function(req, res, next) {
+       var courseId = req.query.courseId;
+       var userId = req.session.userId;
+       console.log("courses/userCourseCheck:courseId-->%s,userId-->%s", courseId,userId);
+       courseDao.insertUserCourse(courseId, userId, 1, 0, 0, function(err,result){
+             if(err){
+                  console.error("register--%s",err.stack);
+                  return res.status(500).json({"error":"服务器内部错误","success":false});
+             }
+             if(result.affectedRows > 0) {
+                  res.json({"success": true});
+             } else {
+                  res.json({"success": false, error:"服务器内部错误"});
              }
        });
 });
@@ -68,5 +85,62 @@ router.get('/getSessionCourseId', function(req,res,next){
              res.json(({success:false}));
         }
 });
+//update course progress
+router.get('/updateProgress', function(req, res, next) {
+       var courseId = req.query.courseId;
+       var chapterId = req.query.chapterId;
+       var type = req.query.type;
+       var userId = req.session.userId;
+       console.log("courses/updateProgress:courseId-->%s,userId-->%s,type-->%s,chapterId-->%s", courseId, userId, type, chapterId);
+       courseDao.updateChapter(userId, courseId, type, chapterId, function(err,result){
+             if(err){
+                  console.error("register--%s",err.stack);
+                  return res.status(500).json({"error":"服务器内部错误","success":false});
+             }
+             if(result.affectedRows > 0) {
+                  res.json({"success": true});
+             } else {
+                  res.json({"success": false, error:"服务器内部错误"});
+             }
+       });
+});
+//set course finish, complete learn this course
+router.get('/courseFinish', function(req, res, next) {
+       var courseId = req.query.courseId;
+       var type = req.query.type;
+       var userId = req.session.userId;
+       console.log("courses/courseFinish:courseId-->%s,userId-->%s,type-->%s", courseId, userId, type);
+       courseDao.finishCourse(userId, courseId, type, function(err,result){
+             if(err){
+                  console.error("register--%s",err.stack);
+                  return res.status(500).json({"error":"服务器内部错误","success":false});
+             }
+             if(result.affectedRows > 0) {
+                  res.json({"success": true});
+             } else {
+                  res.json({"success": false, error:"服务器内部错误"});
+             }
+       });
+});
+router.get('/learnRecord', function(req, res, next) {
+       var courseId = req.query.courseId;
+       var chapterId = req.query.chapterId;
+       var type = req.query.type;
+       var userId = req.session.userId;
+       var time = new Date();
+       console.log("courses/learnRecord:courseId-->%s,userId-->%s,type-->%s,chapterId-->%s,time-->%s", courseId, userId, type, chapterId, time);
+       courseDao.insertLearnRecord(userId, courseId, type, chapterId, time, function(err,result){
+             if(err){
+                  console.error("register--%s",err.stack);
+                  return res.status(500).json({"error":"服务器内部错误","success":false});
+             }
+             if(result.affectedRows > 0) {
+                  res.json({"success": true});
+             } else {
+                  res.json({"success": false, error:"服务器内部错误"});
+             }
+       });
+});
+
 
 module.exports = router;

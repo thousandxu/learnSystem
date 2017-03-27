@@ -44,7 +44,7 @@ router.post('/login', function(req,res,next) {
              }
              if (result.length > 0) {
              	       // console.log("登陆成功", result);
-                     req.session.userId = result.id;
+                          req.session.userId = result[0].id;
              	       res.status(200).json({"success":true,"data":"登陆成功"});
              } else {
              	       res.status(200).json({"success":false,"error":"用户名或密码错误"});
@@ -93,22 +93,52 @@ router.post('/revisepsd', function(req,res,next) {
         var password = req.body.password;
         var newPsd = req.body.newPsd; 
         userDao.userLogin(username, function(err, result) {
-            if(err){
-                      console.error("login--%s",err.stack);
-                      return res.status(500).json({"error":"服务器内部错误","success":false});
-                 }
-                 if (result.length > 0) {
-                           res.status(200).json({"success":true,"data":result});
-                 } else {
-                           res.status(200).json({"success":false,"error":"用户不存在"});
-                 }
+             if(err){
+                  console.error("login--%s",err.stack);
+                  return res.status(500).json({"error":"服务器内部错误","success":false});
+             }
+             if (result.length > 0) {
+                       res.status(200).json({"success":true,"data":result});
+             } else {
+                       res.status(200).json({"success":false,"error":"用户不存在"});
+             }
         });
+});
+
+router.get('getUserCourses', function(req, res, next) {
+       var userId = req.session.userId;
+       console.log("users/getUserCourses:userId-->%s",userId); 
+       userDao.selectUserCourse(userId, function(err, result) {
+             if(err){
+                  console.error("login--%s",err.stack);
+                  return res.status(500).json({"error":"服务器内部错误","success":false});
+             }
+             if (result.length > 0) {
+                  res.status(200).json({"success":true,"data":result});
+             }
+       });
+});
+
+router.get('getUserLearnRecord', function(req, res, next) {
+       var userId = req.session.userId;
+       var from = req.query.from;
+       var to = req.query.to;
+       console.log("users/getUserLearnRecord:userId-->%s,from-->%s,to-->%s",userId, from, to); 
+       userDao.selectUserRecord(userId, from, to, function(err, result) {
+             if(err){
+                  console.error("login--%s",err.stack);
+                  return res.status(500).json({"error":"服务器内部错误","success":false});
+             }
+             if (result.length > 0) {
+                  res.status(200).json({"success":true,"data":result});
+             }
+       });
 });
 //获取ssession中的用户名
 router.get('/getSessionName', function(req,res,next){
         // console.log("/getSessionName");
         if(req.session.username){
-             res.json(({success:true, name:req.session.username}));
+             res.json(({success:true, name:req.session.username, userId: req.session.userId}));
         }else{
              res.json(({success:false}));
         }

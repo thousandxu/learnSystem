@@ -25,10 +25,12 @@ angular.module('BlankApp')
             
 }])
 //点击查看单个课程章节的Controller
-.controller('CourseDetailCtrl', ['$rootScope', '$scope', '$http','$location','$stateParams','getCourse','getChapters','courseSession','checkUserCourse',
-      function($rootScope, $scope, $http,$location, $stateParams,getCourse,getChapters,courseSession,checkUserCourse){
+.controller('CourseDetailCtrl', ['$rootScope', '$scope', '$http','eventbus','$location','$stateParams','getCourse','getChapters','courseSession','checkUserCourse','sessionStore','studyCourseStore','$mdDialog','learnRecord','updateProgress',
+      function($rootScope, $scope, $http,eventbus,$location, $stateParams,getCourse,getChapters,courseSession,checkUserCourse,sessionStore,studyCourseStore,$mdDialog,learnRecord,updateProgress){
       console.log('courseId', $stateParams.courseId);
       var initData = function() {
+            $scope.chapterList = [];
+            $scope.wordChapter = [];
             getCourse.get({
                  courseId: $scope.courseId
             }, function(resp) {
@@ -36,25 +38,42 @@ angular.module('BlankApp')
                  $scope.nowCourse = resp.data;
             });
             checkUserCourse.get({
-                 courseId: $scope.courseId
+                 courseId: $scope.courseId,
+                 type: 1
+                 // userId: $scope.userId
             }, function(resp) {
-                 console.log(resp);
-            })
-            $scope.videoChapter = [];
-            $scope.wordChapter = [];
-            getChapters.get({
-                courseId: $scope.courseId
-            }, function(resp) {
-                console.log(resp);
-                var result = resp.data;
-                _.forEach(result, function(data) {
-                      if (data.type === 1) {
-                           $scope.videoChapter.push(data);
-                      }
-                });
+                 console.log("checkUserCourse", resp);
+                 $scope.hasLearn = resp.learn;
+                 $scope.nowProgress = resp.data[0].chapterId;
+                 getChapters.get({
+                    courseId: $scope.courseId
+                 }, function(resp) {
+                    console.log(resp);
+                    var result = resp.data;
+                    _.forEach(result, function(data) {
+                          if (data.type === 1) {
+                               $scope.chapterList.push(data);
+                          }
+                    });
+                    _.forEach($scope.chapterList, function(item) {
+                          item.learnShow = false;
+                          if (item.chapterId <= ($scope.nowProgress + 1)) {
+                              item.learnShow = true;
+                          }
+                    });
+                 });
             });
       }
       var init = function() {
+            // sessionStore.get({},function(response){
+            //          // console.info(response);
+            //          if (response.success) {
+            //              $scope.userId = response.userId;
+            //              $scope.ifLogin = true;
+            //          } else {
+            //              $scope.ifLogin = false;
+            //          }
+            // });
             if ($stateParams.courseId) {
                     $scope.courseId = $stateParams.courseId;
                     initData();
@@ -66,5 +85,57 @@ angular.module('BlankApp')
             }
       }
       init();
+
+      $scope.studyCourse = function() {
+            studyCourseStore.get({
+                  courseId: $scope.courseId
+            }, function(resp) {
+                   if (resp.success) {
+                       $scope.hasLearn = true;
+                   } else {
+                       eventbus.emitMsg("warnMessage",resp.error);
+                   }
+            })
+      }
+
+      $scope.learnChapter = function(chapterOption, ev) {
+            console.log("study");
+            learnRecord.get({
+                  courseId: $scope.courseId,
+                  chapterId: chapterOption.chapterId,
+                  type: 1
+            }, function(resp) {
+                  console.log("learnRecord", resp);
+            })
+            if (chapterOption.chapterId > $scope.nowProgress) {
+                updateProgress.get({
+                     courseId: $scope.courseId,
+                     chapterId: chapterOption.chapterId,
+                     type: 1
+                }, function(resp) {
+                     console.log("updateProgress", resp);
+                })
+            }
+            $mdDialog.show({
+                controller: 'CourseVedioCtrl',
+                templateUrl: 'views/course/courseVedio.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                escapeToClose: false,
+                locals: {
+                     chapterOption: chapterOption
+                }
+            })
+            .then(function(result) {
+              
+            });
+      }
+            
+}])
+.controller('CourseVedioCtrl', ['$rootScope', '$scope', '$http','$location',"$mdDialog",
+      function($rootScope, $scope, $http,$location, $mdDialog){
+      $scope.close = function() {
+           $mdDialog.cancel();
+      }
             
 }])

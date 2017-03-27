@@ -37,6 +37,17 @@ function UserService(){
 		var sql = "select * from userCourse where userId=?";
 		sqlExcutor.excute(sql, option, callback);
 	}
+	this.selectUserRecord = function(userId, from, to, callback) {
+		var option = [userId];
+		var sql = "select * from learnRecord where userId=? limit";
+		sqlExcutor.excute(sql, option, callback);
+	}
+	this.selectUserNote = function() {
+
+	}
+	this.selectUserFriend = function() {
+
+	}
 
 
 

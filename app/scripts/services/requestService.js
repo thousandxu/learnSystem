@@ -37,6 +37,15 @@ angular.module('BlankApp')
 .service('checkUserCourse', ['$resource', function($resource) {
         return $resource('course/userCourseCheck');
 }])
+.service('studyCourseStore', ['$resource', function($resource) {
+        return $resource('course/studyCourse');
+}])
+.service('updateProgress', ['$resource', function($resource) {
+        return $resource('course/updateProgress');
+}])
+.service('learnRecord', ['$resource', function($resource) {
+        return $resource('course/learnRecord');
+}])
 .service('getCourse', ['$resource', function($resource) {
         return $resource('course/getCourse');
 }])

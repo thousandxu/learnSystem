@@ -432,6 +432,9 @@
     color: #393d40;
     font-size: x-large;
 }
+.chapter_container .chapter button {
+    float: right;
+}
 .node::before {
     background: #fff;
     background-size: 80%;
