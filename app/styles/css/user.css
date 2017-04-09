@@ -41,3 +41,81 @@
     width: 100%;
     height: 100%;
 }
+
+/*用户学习课程页面css*/
+.user-course-warp {
+    padding: 10px;
+    position: relative;
+    min-height: 300px;
+    height: auto;
+}
+.user-course-list {
+    float: left;
+}
+.user-course-box {
+    display: inline-block;
+    height: 300px;
+    width: 250px;
+    border-radius: 2px;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+    margin-left: 10px;
+    border: 1px solid #dcdcdc;
+}
+.user-course-box:hover {
+    box-shadow: 0px 1px 10px #888888;
+}
+.box-course-img {
+    height: 130px;
+    padding: 2px;
+    border-bottom: 1px solid #ececec;
+}
+.box-course-img img{
+    width: 100%;
+    height: 130px;
+}
+.box-course-name {
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+.box-course-name label {
+    font-size: large;
+}
+.box-course-progress {
+    padding: 15px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5;
+}
+.box-course-progress-bar {
+    height: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+}
+.box-course-progress-bar .process-bar{
+    float: left;
+    width: 0;
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
+    color: #fff;
+    text-align: center;
+    background-color: #5bc0de;
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+    -webkit-transition: width .6s ease;
+    -o-transition: width .6s ease;
+    transition: width .6s ease;
+}
+.box-course-progress-btn{
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+}

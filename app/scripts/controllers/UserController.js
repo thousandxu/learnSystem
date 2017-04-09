@@ -50,16 +50,28 @@ angular.module('BlankApp')
        
 }])
 //用户学习课程
-.controller('UserCourseCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','$mdDialog',
-       function($rootScope, $scope, $http,$location, eventbus, $mdDialog){
-        
-       
+.controller('UserCourseCtrl', ['$rootScope', '$scope', 'eventbus','userCourses',
+       function($rootScope, $scope, eventbus, userCourses){
+       var initData = function() {
+             userCourses.get({}, function(resp) {
+                  // console.log("用户学习的课程", resp);
+                  _.forEach(resp.data, function(item) {
+                      item.progress = (item.chapterId / item.courseAllChapter) * 100 + "%";
+                  });
+                  $scope.userCourse = resp.data;
+             })
+       }
+       initData();
 }])
 //用户学习记录
-.controller('UserRecordCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','$mdDialog',
-       function($rootScope, $scope, $http,$location, eventbus, $mdDialog){
-        
-      
+.controller('UserRecordCtrl', ['$rootScope', '$scope', 'getlearnRecord',
+       function($rootScope, $scope, getlearnRecord){
+       var initData = function() {
+             getlearnRecord.get({}, function(resp) {
+                  console.log("学习Record", resp);
+             });
+       }
+       initData();
 }])
 //用户学习笔记
 .controller('UserNoteCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','$mdDialog',

@@ -33,13 +33,14 @@ function UserService(){
 	}
 	//查看用户学习的所有课程
 	this.selectUserCourse = function(userId, callback) {
-		var option = [id];
-		var sql = "select * from userCourse where userId=?";
+		var option = [userId];
+		var sql = "select * from userCourse, course where userId=? and userCourse.courseId=course.courseId";
 		sqlExcutor.excute(sql, option, callback);
 	}
-	this.selectUserRecord = function(userId, from, to, callback) {
+	//获取用户在某个时间范围的学习记录
+	this.selectUserRecord = function(userId, callback) {
 		var option = [userId];
-		var sql = "select * from learnRecord where userId=? limit";
+		var sql = "select learnRecord.*, course.courseName, chapter.chapterName from learnRecord, course, chapter where learnRecord.userId=? and learnRecord.courseId = course.courseId and learnRecord.courseId = chapter.courseId and learnRecord.chapterId = chapter.chapterId";
 		sqlExcutor.excute(sql, option, callback);
 	}
 	this.selectUserNote = function() {

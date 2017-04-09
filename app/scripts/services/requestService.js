@@ -34,6 +34,12 @@ angular.module('BlankApp')
               } 
         });
 }])
+.service('userCourses', ['$resource', function($resource) {
+        return $resource('user/getUserCourses');
+}])
+.service('getlearnRecord', ['$resource', function($resource) {
+        return $resource('user/getUserLearnRecord');
+}])
 .service('checkUserCourse', ['$resource', function($resource) {
         return $resource('course/userCourseCheck');
 }])

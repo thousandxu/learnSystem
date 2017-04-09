@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var userService=require('../services/UserService');
 var userDao=new userService();
-
+var courseService=require('../services/CourseService');
+var courseDao=new courseService();
 
 var success={"success":true};
 var failure={"success":false};
@@ -104,27 +105,39 @@ router.post('/revisepsd', function(req,res,next) {
              }
         });
 });
-
-router.get('getUserCourses', function(req, res, next) {
+//获取用户学习课程
+router.get('/getUserCourses', function(req, res, next) {
        var userId = req.session.userId;
-       console.log("users/getUserCourses:userId-->%s",userId); 
+       console.log("users/getUserCourses:userId-->%s",userId);
        userDao.selectUserCourse(userId, function(err, result) {
              if(err){
                   console.error("login--%s",err.stack);
                   return res.status(500).json({"error":"服务器内部错误","success":false});
              }
              if (result.length > 0) {
-                  res.status(200).json({"success":true,"data":result});
+                   async.each(result, function(item, ecallback) {
+                         courseDao.selectChapter(item.courseId, function(error, result) {
+                               if(result.length > 0) {
+                                    item.courseAllChapter = result.length;
+                               }
+                               ecallback(error, item);
+                         });
+                   }, function(error) {
+                         // console.log('result0', result);
+                         res.status(200).json({"success":true,"data":result});
+                         console.log('error', error);
+                   }); 
              }
        });
-});
 
-router.get('getUserLearnRecord', function(req, res, next) {
+});
+//获取用户学习记录
+router.get('/getUserLearnRecord', function(req, res, next) {
        var userId = req.session.userId;
-       var from = req.query.from;
-       var to = req.query.to;
-       console.log("users/getUserLearnRecord:userId-->%s,from-->%s,to-->%s",userId, from, to); 
-       userDao.selectUserRecord(userId, from, to, function(err, result) {
+       // var from = req.query.from;
+       // var to = req.query.to;
+       console.log("users/getUserLearnRecord:userId-->%s", userId); 
+       userDao.selectUserRecord(userId, function(err, result) {
              if(err){
                   console.error("login--%s",err.stack);
                   return res.status(500).json({"error":"服务器内部错误","success":false});

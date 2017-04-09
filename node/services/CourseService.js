@@ -19,7 +19,6 @@ function CourseService(){
               var sql = "insert into userCourse(userId, courseId, type, chapterId, finish) values(?,?,?,?,?)";
               sqlExcutor.excute(sql, option, callback);
        }
-       //
        this.checkCourse = function(courseId, userId, callback) {
               var option = [userId, courseId];
               var sql = "select * from userCourse where userId=? and courseId=?";
@@ -37,6 +36,7 @@ function CourseService(){
               var sql = "update userCourse set chapterId=? where userId=? and courseId=? and type=?";
               sqlExcutor.excute(sql, option, callback);
        }
+       //课程学习完成标志 将finish置为1
        this.finishCourse = function(userId, courseId, type, callback) {
               var option = [userId, courseId, type];
               var sql = "update userCourse set finish=1 where userId=? and courseId=? and type=?";

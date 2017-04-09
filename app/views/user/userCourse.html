@@ -1,3 +1,21 @@
-<div>
-	yonghu xuexi kcheng
+<div class="user-course-warp" auto-float auto-float-data="userCourse">
+      <div class="user-course-list" ng-repeat="item in userCourse">
+            <div class="user-course-box">
+                 <div class="box-course-img">
+                       <img src="/resources/course/css.jpg"> 
+                 </div>
+                 <div class="box-course-name">
+                       <label ng-bind="item.courseName"></label>
+                 </div>
+                 <div class="box-course-progress">
+                        <div class="box-course-progress-bar">
+                            <div class="process-bar" style="width: {{item.progress}}"></div>
+                        </div>
+                        <div class="box-course-progress-btn">
+                            <span>课程进度</span>
+                            <span>{{item.chapterId}}/{{item.courseAllChapter}}</span>
+                        </div>
+                 </div>
+            </div>
+      </div>
 </div>
