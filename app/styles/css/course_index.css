@@ -121,25 +121,41 @@
 .special_learn_way{
     display: block;
     background-color: #FDB089;
-    height: 450px;
+    height: 650px;
 }
 .feature_holder{
     width: 100%;
     padding:3.5em 0;
 }
-.feature_holder aside{
+.feature_holder>div{
     text-align: left;
     font-size: 80%;
     background: #fff;
     border-radius: 10px;
     padding: 0 1.5em;
-    display: table-cell;
+    display: inline-block;
     vertical-align: top;
-    width: 380px;
+    width: 400px;
     height: 370px;
 }
-
-
+.feature_holder>div:not(:last-child) {
+    margin-right: 15px;
+}
+.feature_description {
+    padding-top: 15px; 
+}
+.feature_description span{
+    color: #5bb5de;
+    font-size: 15px;
+    font-weight: 600;
+}
+.feature_img {
+    padding-bottom: 15px;
+}
+.feature_img img {
+     height: 235px;
+     width: 365px;
+}
 
 
 

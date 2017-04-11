@@ -1,4 +1,4 @@
-angular.module('nephele')
+angular.module('BlankApp')
 .directive('autoFloat',['$timeout',function($timeout){
     return {
       restrict:'A',
