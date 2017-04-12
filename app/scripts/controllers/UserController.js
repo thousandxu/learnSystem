@@ -52,24 +52,24 @@ angular.module('BlankApp')
 }])
 //用户信息设置 
 .controller('UserSettingCtrl', ['$rootScope', '$scope', '$http','eventbus','$mdDialog','getUserInfo','updateUserInfo',
-       function($rootScope, $scope, $http, eventbus, $mdDialog, getUserInfo, updateUserInfo){
-        var init = function() {
-              getUserInfo.get({}, function(resp) {
-                     console.log(resp);
-                     $scope.nowUser = resp.data[0];
-              });
-        }
-        init();
-
-        $scope.saveUser = function() {
-              console.log($scope.nowUser);
-              updateUserInfo.save({
-                   user: $scope.nowUser
-              }, function(resp) {
+      function($rootScope, $scope, $http, eventbus, $mdDialog, getUserInfo, updateUserInfo){
+      var init = function() {
+            getUserInfo.get({}, function(resp) {
                    console.log(resp);
-              })
-        }
-       
+                   $scope.nowUser = resp.data[0];
+            });
+            angular.element(".form_datetime").datepicker({format: 'yyyy-mm-dd'});
+      }
+      init();
+
+      $scope.saveUser = function() {
+            console.log($scope.nowUser);
+            updateUserInfo.save({
+                 user: $scope.nowUser
+            }, function(resp) {
+                 console.log(resp);
+            })
+      }
 }])
 //用户学习课程
 .controller('UserCourseCtrl', ['$rootScope', '$scope', 'eventbus','userCourses',
