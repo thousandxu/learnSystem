@@ -8,6 +8,7 @@ var courseDao=new courseService();
 var success={"success":true};
 var failure={"success":false};
 
+var fs = require('fs');
 var async=require('async');
 
 /*用户注册*/
@@ -25,6 +26,18 @@ router.post('/register', function(req, res, next) {
              }
              if(result.affectedRows > 0) {
 	              console.log('register success');
+                    userDao.userLogin(username,password,function(err, result) {
+                         if (result.length > 0) {
+                             var path = "./resources/user" + result[0].id;
+                             fs.mkdir(path, function(error) {
+                                 if (error) {
+                                     console.error(error);
+                                 } else {
+                                     console.log("创建目录成功");
+                                 }
+                             });
+                         }
+                    });
 	              res.json({"success": true,"data": "注册成功"});
              } else {
 	              console.error("register--affectrows:%s",affectedRows);

@@ -1,0 +1,24 @@
+<div class="container">
+      <ol class="breadcrumb bbs-breadcrumb">
+            <li><a ui-sref="bbs">论坛</a></li>
+            <li class="active"><a href="#">{{nowResource}}</a></li>
+      </ol>
+      <ul class="nav nav-pills">
+            <li ng-repeat="option in categoryList" ng-class="{active:nowCategory === option.name}">
+                <a href="" ng-bind="option.cname"></a>
+            </li>
+      </ul>
+      <div class="books-warp">
+            <div class="row">
+                  <div class="col-md-3">
+                       <div class="book-warp" ng-click="bookDownload()">
+                           <div class="good-book">推荐</div>
+                           <img src="/images/book.png">
+                           <div class="txt">
+                                <h3>haha</h3>
+                           </div>
+                       </div>
+                  </div>
+            </div>
+      </div>
+</div>
