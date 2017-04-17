@@ -113,6 +113,19 @@ router.get('/delUserFavorite', function(req,res,next) {
               }
        });
 });
+// 获取所有的图书资源
+router.get('/getAllBooks', function(req,res,next) {
+        console.log("bbs/resources/getAllBooks");
+        bbsDao.selectAllBook(function(err, result) {
+              if(err){
+                    console.error("error--%s",err.stack);
+                    return res.status(500).json({"error":"服务器内部错误","success":false});
+              }
+              if (result.length > 0) {
+                         res.status(200).json({"success":true,"data":result});
+              }
+        });
+});
 
 
 module.exports = router;

@@ -4,13 +4,13 @@ function BbsService() {
        //获取所有的插件资源信息
        this.selectAllResources = function(callback) {
               // var option = [userId];
-              var sql = "select resources.*, users.username from resources, users where resources.ownerId=? and users.id";
+              var sql = "select resources.*, users.username from resources, users where resources.ownerId=users.id";
               sqlExcutor.excute(sql, callback);
        }
        //获取选定用户喜爱的插件资源
        this.selectUserFavoriteResources = function(userId, callback) {
               var option = [userId];
-              var sql = "select * from resources, userResources where resources.id = userResources.resourceId and userResources.userId=?";
+              var sql = "select * from resources, userResources where resources.id=userResources.resourceId and userResources.userId=?";
               sqlExcutor.excute(sql, option, callback);
        }
        // 获取用户发布的插件资源

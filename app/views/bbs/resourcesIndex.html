@@ -5,26 +5,30 @@
       </ol>
       <div class="resources-warp">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3" ng-repeat="item in resourcesList">
                     <div class="resource-warp">
                           <div class="resource-img">
                                <img src="/images/book.png">
                           </div>
                           <div class="resource-introduce">
-                               <h4>简单使用</h4>
-                               <small>可以任意修改  下拉箭头样式  可以自己放入任意图片来代替下拉箭头样式</small>
+                               <h4>{{item.resourceName}}</h4>
+                               <small>{{item.resourceInfo}}</small>
                           </div>
                           <div class="resource-category">
                                <i class="fa fa-list-ul"></i>
-                               <span>上传</span>
+                               <span ng-bind="item.keyWord"></span>
                           </div>
                           <div class="resource-info">
                                <i class="fa fa-eye"></i>
-                               <span class="pr12">50</span>
+                               <span class="pr12" ng-bind="item.viewCount"></span>
                                <i class="fa fa-heart"></i>
-                               <span class="pr12">50</span>
+                               <span class="pr12" ng-bind="item.favoriteCount"></span>
                                <div class="user">
-                                   <i class="fa fa-user-secret"></i>
+                                   <i class="fa fa-user-secret">
+                                       <md-tooltip md-direction="top">
+                                            <span ng-bind="item.username"></span>
+                                       </md-tooltip>
+                                   </i>
                                </div>
                           </div>
                      </div>

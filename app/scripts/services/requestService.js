@@ -61,6 +61,15 @@ angular.module('BlankApp')
 .service('courseSession', ['$resource', function($resource) {
         return $resource('course/getSessionCourseId');
 }])
+// bbs
+.service('allResources', ['$resource', function($resource) {
+        return $resource('bbs/getAllResouces');
+}])
+
+
+.service('allBooks', ['$resource', function($resource) {
+        return $resource('bbs/getAllBooks');
+}])
 .service('sessionStore', ['$resource', function($resource) {
         return $resource('user/getSessionName');
 }])
