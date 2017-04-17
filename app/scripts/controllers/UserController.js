@@ -20,6 +20,10 @@ angular.module('BlankApp')
               view: '.notes',
               icon: 'fa-signal',
               name: '学习笔记'
+       }, {
+              view: '.resources',
+              icon: 'fa-signal',
+              name: '插件资源'
        }];
        $scope.nowCall = $scope.userManageList[0].name;
 
@@ -44,6 +48,9 @@ angular.module('BlankApp')
                         break;
                     case "notes":
                         $scope.nowCall = "学习笔记";
+                        break;
+                    case "resources":
+                        $scope.nowCall = "插件资源";
                         break;
              }
        }
@@ -102,6 +109,12 @@ angular.module('BlankApp')
 //用户学习笔记
 .controller('UserNoteCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','$mdDialog',
        function($rootScope, $scope, $http,$location, eventbus, $mdDialog){
+        
+       
+}])
+//用户收藏插件资源
+.controller('UserResourcesCtrl', ['$rootScope', '$scope', 'eventbus',
+       function($rootScope, $scope, eventbus){
         
        
 }])

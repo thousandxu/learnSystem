@@ -4,6 +4,8 @@ var userService=require('../services/UserService');
 var userDao=new userService();
 var courseService=require('../services/CourseService');
 var courseDao=new courseService();
+var BbsService=require('../services/BBSServices.js');
+var bbsDao=new BbsService();
 
 var success={"success":true};
 var failure={"success":false};
@@ -159,6 +161,34 @@ router.get('/getUserLearnRecord', function(req, res, next) {
                   res.status(200).json({"success":true,"data":result});
              }
        });
+});
+//获取选定用户喜爱的插件资源
+router.get('/getUserFavoriteResouces', function(req,res,next) {
+        var userId = req.session.userId;
+        console.log("users/getUserFavoriteResouces:userId-->%s", userId);
+        bbsDao.selectUserFavoriteResources(userId, function(err, result) {
+              if(err){
+                    console.error("error--%s",err.stack);
+                    return res.status(500).json({"error":"服务器内部错误","success":false});
+              }
+              if (result.length > 0) {
+                         res.status(200).json({"success":true,"data":result});
+              }
+        });
+});
+// 获取用户发布的插件资源
+router.get('/getUserResouces', function(req,res,next) {
+        var userId = req.session.userId;
+        console.log("users/getUserResouces:userId-->%s", userId);
+        bbsDao.selectUserResources(userId, function(err, result) {
+              if(err){
+                    console.error("error--%s",err.stack);
+                    return res.status(500).json({"error":"服务器内部错误","success":false});
+              }
+              if (result.length > 0) {
+                         res.status(200).json({"success":true,"data":result});
+              }
+        });
 });
 //获取ssession中的用户名
 router.get('/getSessionName', function(req,res,next){

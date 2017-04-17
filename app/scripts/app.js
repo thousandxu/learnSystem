@@ -64,6 +64,10 @@ angular.module('BlankApp',[
 		templateUrl: 'views/user/userNotes.html',
 		controller: 'UserNoteCtrl'
 	})
-	
+	.state('user.resources',{
+		url: '/resources',
+		templateUrl: 'views/user/userResources.html',
+		controller: 'UserResourcesCtrl'
+	})
 
 }]);
