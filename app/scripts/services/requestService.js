@@ -40,6 +40,24 @@ angular.module('BlankApp')
 .service('getlearnRecord', ['$resource', function($resource) {
         return $resource('user/getUserLearnRecord');
 }])
+//  用户交友相关请求
+.service('getStranger', ['$resource', function($resource) {
+        return $resource('user/getStranger');
+}])
+.service('requestFriends', ['$resource', function($resource) {
+        return $resource('user/requestFriends');
+}])
+.service('getFriendRequests', ['$resource', function($resource) {
+        return $resource('user/getFriendRequests');
+}])
+.service('accessFriend', ['$resource', function($resource) {
+        return $resource('user/accessFriend');
+}])
+.service('getUserFriends', ['$resource', function($resource) {
+        return $resource('user/getUserFriends');
+}])
+
+
 .service('checkUserCourse', ['$resource', function($resource) {
         return $resource('course/userCourseCheck');
 }])
@@ -65,8 +83,30 @@ angular.module('BlankApp')
 .service('allResources', ['$resource', function($resource) {
         return $resource('bbs/getAllResouces');
 }])
-
-
+.service('setResourceId', ['$resource', function($resource) {
+        return $resource('bbs/setResourceId');
+}])
+.service('getResourceId', ['$resource', function($resource) {
+        return $resource('bbs/getResourceId');
+}])
+.service('getOneResource', ['$resource', function($resource) {
+        return $resource('bbs/getOneResource');
+}])
+.service('viewCount', ['$resource', function($resource) {
+        return $resource('bbs/viewCount');
+}])
+.service('addFavorite', ['$resource', function($resource) {
+        return $resource('bbs/addUserFavorite');
+}])
+.service('delFavorite', ['$resource', function($resource) {
+        return $resource('bbs/delUserFavorite');
+}])
+.service('getUserResouces', ['$resource', function($resource) {
+        return $resource('bbs/getUserResouces');
+}])
+.service('getReleaseResouces', ['$resource', function($resource) {
+        return $resource('user/getUserResouces');
+}])
 .service('allBooks', ['$resource', function($resource) {
         return $resource('bbs/getAllBooks');
 }])

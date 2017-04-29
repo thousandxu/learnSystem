@@ -20,7 +20,7 @@
 .head_portrait {
     position: absolute;
     top: 23%;
-    left: 32%;
+    left: 28%;
 }
 .head_portrait_img{
     width: 114px;
@@ -30,6 +30,36 @@
     border-radius: 50%;
     position: relative;
     display: block;
+}
+.user_wrap_left_top .friend {
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    bottom: 10px;
+}
+.user_wrap_left_top .friend ul{
+    margin: 0;
+    padding: 0;
+    background-color: rgba(78, 172, 251, 0.45);
+}
+.user_wrap_left_top .friend ul li {
+    height: 60px;
+    width: 49%;
+    display: inline-block;
+    color: #FFFFFF;
+    padding: 20px 26px;
+}
+.user_wrap_left_top .friend ul li:first-child {
+    border-right: 1px solid #ffffff;
+}
+.user_wrap_left_top .friend ul li span:first-child {
+    font-size: medium;
+    font-weight: 700;
+}
+.user_wrap_left_top .friend ul li .badge{
+    float: right;
+    background-color: #FFF;
+    color: #abd5f9;
 }
 .user_wrap_right{
     float: left;
@@ -144,4 +174,97 @@
     display: inline-block;
     vertical-align: top;
     margin-top: 0px;
+}
+
+
+/*userStranger.html   css*/
+.user-stranger {
+    width: 100%;
+    background-color: #f7f7f7;
+    height: calc(100vh - 52px);
+}
+.stranger-list-warp {
+    width: 100%;
+    padding: 10px 20px;
+}
+.stranger-warp {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #dcdcdc;
+    box-shadow: 0 0 10px #dcdcdc;
+    margin-bottom: 10px;
+    height: 100px;
+    padding: 5px 10px;
+    position: relative;
+}
+.stranger-warp .portrait {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    float: left;
+    display: inline-block;
+    margin: 10px 25px;
+    box-shadow: 0 0 10px #a09898;;
+}
+.stranger-warp .info {
+    float: left;
+    display: inline-block;
+    margin-left: 10px;
+}
+.stranger-warp .info .userInfo strong {
+    font-size: 24px;
+    color: #ababab;
+    margin-right: 10px;
+}
+.stranger-warp .info .userInfo span {
+    font-size: 16px;
+    color: #66a0f1;
+}
+.stranger-warp .userIntorduce {
+    display: block;
+    height: 25px;
+    line-height: 25px;
+    color: #847979;
+    max-width: 600px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.stranger-warp .classes {
+    display: block;
+    height: 28px;
+    line-height: 28px;
+    color: #726fb1;
+    font-weight: 700;
+}
+
+
+
+.stranger-warp button {
+    position: absolute;
+    right: 30px;
+    top: 32px;
+}
+
+.resource-ul {
+    margin-left: 350px;
+}
+.resource-ul li {
+    display: inline-block;
+    color: #4498e0;
+    outline: none;
+}
+.resource-ul li:first-child {
+    margin-right: 10px;
+    border-right: 1px solid #dcdcdc;
+    padding-right: 10px;
+}
+.resource-ul li.active {
+    color: #0d71c7;
+    font-weight: 700;
+}
+.noResource{
+    color: #3294e8;
+    font-size: 28px;
+    display: inline-block;
+    margin-top: 50px;
 }

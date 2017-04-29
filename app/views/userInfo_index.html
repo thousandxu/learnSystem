@@ -7,6 +7,22 @@
 		       	<div class="head_portrait">
 		       		 <img src="/images/person.png" class="head_portrait_img">
 		       	</div>
+		       	<div class="friend">
+		       		 <ul>
+		       		 	<li>
+		       		 	   <a ui-sref=".friends">
+		       		 		 <span>好友</span>
+		       		 		 <span class="badge" ng-bind="friendCount"></span>
+		       		         </a>
+		       		 	</li>
+		       		 	<li>
+		       		 	   <a ui-sref=".request">
+		       		 		 <span>消息</span>
+		       		 		 <span class="badge" ng-bind="requestCount"></span>
+		       		 	   </a>
+		       		 	</li>
+		       		 </ul>
+		       	</div>
 		       </div>
 		       <ul class="nav nav-pills nav-stacked">
 				<li ng-repeat="option in userManageList" ng-class="{active:nowCall == option.name}" ng-click="manageClick(option)">

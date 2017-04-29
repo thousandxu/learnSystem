@@ -1,0 +1,58 @@
+<div class="user-course-warp" >
+      <ul class="resource-ul">
+         <li ng-repeat="item in resourceMenu" ng-class="{active: nowKey === item.key}" ng-click="change(item)">
+              <span ng-bind="item.name"></span>
+         </li>
+      </ul>
+      <div class="resources-warp" ng-if="status && nowKey === 'collect'">
+            <div class="row">
+                <div class="col-md-4" ng-repeat="item in resourceList">
+                    <div class="resource-warp">
+                          <div class="resource-img">
+                               <!-- <img src="/images/book.png"> -->
+                               <img src="{{item.resourceImg}}">
+                          </div>
+                          <div class="resource-introduce">
+                               <a ui-sref="resourcesDetail({resourceId: item.id})" ng-click="addViewCount(item.id, item.viewCount)">
+                                   <h4>{{item.resourceName}}</h4>
+                               </a>
+                               <small>{{item.resourceInfo}}</small>
+                          </div>
+                          <div class="resource-category">
+                               <i class="fa fa-list-ul"></i>
+                               <span ng-bind="item.keyWord"></span>
+                          </div>
+                     </div>
+                </div>
+            </div>
+            <!-- <div class="resources-list"></div> -->
+      </div>
+      <div class="resources-warp" ng-if="status2 && nowKey === 'release'">
+            <div class="row">
+                <div class="col-md-4" ng-repeat="item in resourceList2">
+                    <div class="resource-warp">
+                          <div class="resource-img">
+                               <!-- <img src="/images/book.png"> -->
+                               <img src="{{item.resourceImg}}">
+                          </div>
+                          <div class="resource-introduce">
+                               <a ui-sref="resourcesDetail({resourceId: item.id})" ng-click="addViewCount(item.id, item.viewCount)">
+                                   <h4>{{item.resourceName}}</h4>
+                               </a>
+                               <small>{{item.resourceInfo}}</small>
+                          </div>
+                          <div class="resource-category">
+                               <i class="fa fa-list-ul"></i>
+                               <span ng-bind="item.keyWord"></span>
+                          </div>
+                     </div>
+                </div>
+            </div>
+      </div>
+</div>
+<div class="user-course-warp" ng-if="!status" style="text-align: center;">
+       <span class="noResource" ng-bind="message"></span>
+</div>
+<div class="user-course-warp" ng-if="!status2" style="text-align: center;">
+       <span class="noResource" ng-bind="message2"></span>
+</div>

@@ -1,0 +1,18 @@
+<div>
+     <div class="stranger-list-warp">
+           <div class="stranger-warp" ng-repeat="item in requestList">
+                  <div class="portrait"></div>
+                  <div class="info">
+                        <div class="userInfo">
+                               <strong ng-bind="item.username"></strong
+                               <i class="fa fa-mail fa-lg"></i>
+                               <span ng-bind="item.email"></span>
+                        </div>
+                        <div class="userIntorduce">
+                               <span ng-bind="item.intorduce"></span>
+                        </div>
+                  </div>
+                  <button class="btn btn-success" ng-click="access($index, item.id)">同意</button>
+           </div>
+     </div>
+</div>

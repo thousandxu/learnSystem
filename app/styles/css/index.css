@@ -2,6 +2,15 @@
     width: 1280px;
     margin:0 auto;
 }
+.p10 {
+    padding: 0 10px;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
 .gummy_nav{
     margin-bottom: 0;
     background-color: #1f384d;

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('BlankApp')
-.controller('UserInfoIndexCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','$mdDialog',
-       function($rootScope, $scope, $http,$location, eventbus, $mdDialog){
+.controller('UserInfoIndexCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','getFriendRequests','getUserFriends',
+       function($rootScope, $scope, $http,$location, eventbus, getFriendRequests, getUserFriends){
         
        $scope.userManageList = [{
               view: '.setting',
@@ -16,11 +16,13 @@ angular.module('BlankApp')
               view:'.record',
               icon:'fa-trash',
               name:'学习记录'
-       }, {
-              view: '.notes',
-              icon: 'fa-signal',
-              name: '学习笔记'
-       }, {
+       }, 
+       // {
+       //        view: '.notes',
+       //        icon: 'fa-signal',
+       //        name: '学习笔记'
+       // }, 
+       {
               view: '.resources',
               icon: 'fa-signal',
               name: '插件资源'
@@ -30,6 +32,24 @@ angular.module('BlankApp')
        $scope.manageClick = function(option) {
               $scope.nowCall = option.name
        }
+
+       var initData = function() {
+             // 已通过验证好友验证的用户好友
+             getUserFriends.get({}, function(resp) {
+                    // console.log("用户好友", resp);
+                    $scope.friendCount = resp.data.length;
+             });
+             // 好友请求
+             getFriendRequests.get({}, function(resp) {
+                    // console.log(resp);
+                    $scope.requestCount = resp.data.length;
+             });
+       }
+       initData();
+
+       eventbus.onMsg("friendAccess", function() {
+             initData();
+       }, $scope);
 
        var href = $location.absUrl();
        var initNav = function(){
@@ -52,10 +72,54 @@ angular.module('BlankApp')
                     case "resources":
                         $scope.nowCall = "插件资源";
                         break;
+                    default:
+                        $scope.nowCall = "null";
+                        break;
              }
        }
        initNav();
-
+}])
+// 处理用户交友请求
+.controller('UserRequestCtrl', ['$rootScope', '$scope', 'getFriendRequests', 'accessFriend', 'eventbus',
+       function($rootScope, $scope, getFriendRequests, accessFriend, eventbus){
+       var initData = function() {
+             getFriendRequests.get({}, function(resp) {
+                    console.log(resp);
+                    $scope.requestList = resp.data;
+             });
+       }
+       $scope.access = function(idx, id) {
+            accessFriend.get({
+                   friendId: id
+            }, function(resp) {
+                   if (resp.success) {
+                         $scope.requestList.splice(idx, 1);
+                         eventbus.emitMsg("friendAccess");
+                   }
+            });
+       }
+       initData();
+}])
+// 获取用户好友列表
+.controller('UserFriendsCtrl', ['$rootScope', '$scope', 'getUserFriends',
+       function($rootScope, $scope, getUserFriends) {
+       var initData = function() {
+             getUserFriends.get({}, function(resp) {
+                    console.log(resp);
+                    _.forEach(resp.data, function(item) {
+                          var classes = "";
+                          _.forEach(item.course, function(course, index) {
+                                 classes += course.courseName;
+                                 if (index !== (item.course.length - 1)) {
+                                       classes += ",";
+                                 }
+                          });
+                          item.classes = classes;
+                    });
+                    $scope.friendList = resp.data;
+             });
+       }
+       initData();
 }])
 //用户信息设置 
 .controller('UserSettingCtrl', ['$rootScope', '$scope', '$http','eventbus','$mdDialog','getUserInfo','updateUserInfo',
@@ -112,9 +176,76 @@ angular.module('BlankApp')
         
        
 }])
-//用户收藏插件资源
-.controller('UserResourcesCtrl', ['$rootScope', '$scope', 'eventbus',
-       function($rootScope, $scope, eventbus){
-        
+//用户收藏插件资源的controller
+.controller('UserResourcesCtrl', ['$rootScope', '$scope', 'getUserResouces', 'getReleaseResouces',
+       function($rootScope, $scope, getUserResouces, getReleaseResouces){
+       var init = function() {
+              $scope.resourceMenu = [{
+                     name: "收藏插件",
+                     key: "collect"
+              }, {
+                     name: "发布插件",
+                     key: "release"
+              }];
+              $scope.nowKey = $scope.resourceMenu[0].key;
+              getUserResouces.get({}, function(resp) {
+                     console.log(resp);
+                     $scope.status = resp.success;
+                     if (resp.success) {
+                           $scope.resourceList = resp.data;
+                     } else {
+                           $scope.message = resp.data;
+                     }
+              });
+              getReleaseResouces.get({}, function(resp) {
+                     console.log(resp);
+                     $scope.status2 = resp.success;
+                     if (resp.success) {
+                           $scope.resourceList2 = resp.data;
+                     } else {
+                           $scope.message2 = resp.data;
+                     }
+              })
+       }
+       init();
+
+       $scope.change = function(item) {
+              $scope.nowKey = item.key;
+       }
+}])
+//用户交友的controller
+.controller('UserStrangersCtrl', ['$rootScope', '$scope', 'eventbus', 'sessionStore', 'getStranger', 'requestFriends',
+       function($rootScope, $scope, eventbus, sessionStore, getStranger, requestFriends){
+       var getStrangerList = function() {
+             getStranger.get({}, function(resp) {
+                    console.log(resp);
+                    if (resp.success) {
+                          $scope.strangerList = resp.data;
+                    }
+                    _.forEach($scope.strangerList, function(item) {
+                          item.classes = "css,html";
+                    });
+             });
+       }
+       var initData = function() {
+             sessionStore.get({}, function(resp) {
+                    if (resp.success) {
+                          $scope.nowUserId = resp.userId;
+                    }
+             })
+             getStrangerList();
+       }
+       initData();
+
+       $scope.requestFriends = function(friendId) {
+             requestFriends.get({
+                   friendId: friendId
+             }, function(resp) {
+                   if (resp.success) {
+                         eventbus.emitMsg('message', '好友请求成功');
+                         getStrangerList();
+                   }
+             });
+       }
        
 }])

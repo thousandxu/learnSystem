@@ -29,20 +29,47 @@ angular.module('BlankApp',[
 		templateUrl: 'views/bbs/bbsIndex.html',
 		controller: 'BBSIndexCtrl'
 	})
+	// .state('experiment',{
+	// 	url: '/experiment',
+	// 	templateUrl: 'views/experiment/expriment.html'
+	// })
 	.state('resources',{
                            url: '/bbs/resources',
 		templateUrl: 'views/bbs/resourcesIndex.html',
 		controller: 'ResourcesIndexCtrl'
+	})
+	.state('resourcesDetail',{
+		params: {
+	                    "resourceId": null
+	              },
+                           url: '/bbs/resources/detail',
+		templateUrl: 'views/bbs/resourceDetail.html',
+		controller: 'ResourcesDetailCtrl'
 	})
 	.state('books',{
                            url: '/bbs/books',
 		templateUrl: 'views/bbs/booksIndex.html',
 		controller: 'BooksIndexCtrl'
 	})
+	.state('stranger',{
+                           url: '/stranger',
+		templateUrl: 'views/user/userStranger.html',
+		controller: 'UserStrangersCtrl'
+	})
 	.state('user',{
 		url: '/user',
 		templateUrl: 'views/userInfo_index.html',
 		controller: 'UserInfoIndexCtrl'
+	})
+	.state('user.friends',{
+		url: '/friends',
+		templateUrl: 'views/user/userFriends.html',
+		controller: 'UserFriendsCtrl'
+	})
+	.state('user.request',{
+		url: '/request',
+		templateUrl: 'views/user/userRequest.html',
+		controller: 'UserRequestCtrl'
 	})
 	.state('user.setting',{
 		url: '/setting',

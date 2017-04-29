@@ -1,0 +1,53 @@
+<div class="container">
+      <ol class="breadcrumb bbs-breadcrumb">
+            <li><a ui-sref="bbs">论坛</a></li>
+            <li><a ui-sref="resources">资源区</a></li>
+            <li class="active"><a href="#">{{nowResource}}</a></li>
+      </ol>
+      <div class="resources-warp">
+            <div class="row">
+                 <div class="resource-detail">
+                     <div class="resource-head">
+                          <h1 ng-bind="resourceDetail.resourceName"></h1>
+                          <p>关键字：{{resourceDetail.keyWord}}</p>
+                          <div class="p10 detail">
+                               <div class="fl">
+                                   <span>
+                                       <i class="fa fa-eye"></i> {{resourceDetail.viewCount}}
+                                   </span>
+                                   <span>
+                                       <i class="fa fa-heart" ng-click="addFavorite(resourceDetail)" ng-class="{heartRed:resourceDetail.favorite}" style="outline: none;"></i> {{resourceDetail.favoriteCount}}
+                                   </span>
+                                   <span>
+                                       <i class="fa fa-comment"></i>
+                                       查看评论
+                                   </span>
+                               </div>
+                          </div>
+                          <!-- <div class="fr">
+                                <div class="bdsharebuttonbox gummy-share" data-tag="share_1">
+                                    <a class="ttqq" data-cmd="tqq" title="分享到QQ好友"></a>
+                                    <a class="ttqzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                                    <a class="ttbdhome" data-cmd="bdhome" title="分享到百度首页"></a>
+                                    <a class="ttsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                                    <a class="tthuaban" data-cmd="huaban" title="分享到花瓣"></a>
+                                    <a class="ttfbook" data-cmd="fbook" title="分享到Facebook"></a>
+                                </div>
+                          </div> -->
+                     </div>
+                     <div class="resource-content">
+                           <img src="{{resourceDetail.resourceImg}}" class="thumbile" alt="基于canvas的星空效果">
+                           <div class="user-info">
+                                <span>test</span>
+                           </div>
+                           <div class="thumbile">
+                                <a class="btn btn-danger">
+                                    <i class="fa fa-cloud-download"></i>
+                                    &nbsp; 立即下载
+                                </a>
+                           </div>
+                     </div>
+                 </div>
+            </div>
+      </div>
+</div>

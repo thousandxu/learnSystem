@@ -39,7 +39,7 @@ angular.module('BlankApp')
                 escapeToClose: false,
              });
         }
-        //
+        // 点击修改密码事件
         $scope.revisepsd = function(ev) {
               $mdDialog.show({
                 controller: 'RevisePsdCtrl',
@@ -48,6 +48,14 @@ angular.module('BlankApp')
                 targetEvent: ev,
                 escapeToClose: false,
              });
+        }
+        // 用户登出
+        $scope.logout = function() {
+             logoutStore.get({}, function(resp) {
+                    if (resp.success) {
+                          $scope.ifLogin = false;
+                    }
+             })
         }
 
         eventbus.onMsg("login_success",function(v,m){
@@ -136,7 +144,6 @@ angular.module('BlankApp')
 }])
 //mdToast 的公共事件
 .controller('WarnCtrl', ['$scope', '$mdToast', 'eventbus', function($scope, $mdToast, eventbus) {
-
        eventbus.onMsg('message', function(event, text) {
               $mdToast.show(
                     $mdToast.simple()

@@ -4,18 +4,19 @@
             <li class="active"><a href="#">{{nowResource}}</a></li>
       </ol>
       <ul class="nav nav-pills">
-            <li ng-repeat="option in categoryList" ng-class="{active:nowCategory === option.name}">
-                <a href="" ng-bind="option.cname"></a>
+            <li ng-repeat="option in categoryList" ng-class="{active:nowCategory === option}" ng-click="bookFilter(option)">
+                <a href="" ng-bind="option"></a>
             </li>
       </ul>
       <div class="books-warp">
             <div class="row">
-                  <div class="col-md-3">
-                       <div class="book-warp" ng-click="bookDownload()">
-                           <div class="good-book">推荐</div>
-                           <img src="/images/book.png">
+                  <div class="col-md-3" ng-repeat="book in bookList">
+                       <div class="book-warp" ng-click="bookDownload()" book-hover>
+                           <div class="good-book" ng-if="book.good === 1">推荐</div>
+                           <img src="{{book.bookImg}}" alt="图书">
                            <div class="txt">
-                                <h3>haha</h3>
+                                <h3>{{book.bookName}}</h3>
+                                <button class="btn">下载</button>
                            </div>
                        </div>
                   </div>

@@ -95,6 +95,116 @@
     font-size: 14px;
 }
 
+/*插件资源详情的css*/
+.resource-detail{
+    background: #fafafa;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
+    position: relative;
+}
+.resource-head {
+    border-bottom: 1px solid #e8e8e8;
+    border-radius: 3px 3px 0 0;
+    border-top: 1px solid #e8e8e8;
+    height: auto;
+    margin: auto;
+    padding: 20px 25px 0;
+    position: relative;
+}
+.resource-head h1 {
+    margin-top: 0px;
+    font-size: 28px;
+    color: #262626;
+}
+.resource-head p {
+    color: dimgray;
+}
+.resource-head span {
+    border-right: 1px solid #e8e8e8;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    margin-right: 10px;
+    padding-right: 10px;
+}
+.heartRed{
+    color: #ea0a0a;
+}
+.resource-head .detail {
+    height: 45px;
+}
+.bdsharebuttonbox .ttqq, 
+.bdsharebuttonbox .ttwx, 
+.bdsharebuttonbox .ttqzone, 
+.bdsharebuttonbox .ttbdhome, 
+.bdsharebuttonbox .ttsina, 
+.bdsharebuttonbox .ttbaidu, 
+.bdsharebuttonbox .ttrenren, 
+.bdsharebuttonbox .tttqq, 
+.bdsharebuttonbox .tthuaban, 
+.bdsharebuttonbox .ttfbook, 
+.bdsharebuttonbox .ttmore {
+    background-repeat: no-repeat;
+    background-image: url(/images/fxtb.png);
+    background-position: 0px 0px;
+}
+.bdsharebuttonbox .ttwx {
+    background-position: 0px -24px;
+}
+.bdsharebuttonbox .ttqzone {
+    background-position: 0px -48px;
+}
+.bdsharebuttonbox .ttsina {
+    background-position: 0px -96px;
+}
+.bdsharebuttonbox .ttbdhome {
+    background-position: 0px -72px;
+}
+.bdsharebuttonbox .tttqq {
+    background-position: 0px -144px;
+}
+.bdsharebuttonbox .tthuaban {
+    background-position: 0px -168px;
+}
+.bdsharebuttonbox .ttfbook {
+    background-position: 0px -192px;
+}
+.bdsharebuttonbox .ttmore {
+    background-position: 0px -216px;
+}
+
+.resource-content {
+    background-color: #FFF;
+    padding-top: 30px;
+    padding-right: 7.1%;
+    padding-left: 7.1%;
+    padding-bottom: 30px;
+    border-radius: 4px;
+    line-height: 1.8;
+    font-size: 16px;
+}
+.resource-content img {
+    width: 100%;
+}
+.thumbile {
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.thumbile a {
+    width: 22%;
+    /*margin-left: 1%;*/
+    /*margin-right: 1%;*/
+    font-size: 1.5rem;
+    line-height: 30px;
+}
+.resource-content .user-info {
+    margin-bottom: 10px;
+}
 /*图书区资源的css*/
 .books-warp {
     padding: 10px 20px;
@@ -112,6 +222,10 @@
     overflow: hidden;
     padding: 0;
     max-width: 100%;
+}
+.book-warp img {
+    width: 100%;
+    height: 100%;
 }
 .book-warp .good-book {
     position: absolute;
@@ -134,13 +248,19 @@
      font-family:"微软雅黑";
 }
 .book-warp .txt h3{
-    font-size:20px;
+    font-size:18px;
     font-weight:100;
     height:45px;
     text-align:center;
     line-height:45px;
+    margin-top: 4px;
 }
-.book-warp .txt p{
-    font-size:14px;
-    text-align:center;
+.book-warp .txt .btn{
+    background-color: rgba(0,0,0,0);
+    border-color: #FFFFFF;
+    margin-left: 75px;
+}
+.book-warp .txt .btn:hover{
+    color: #FFFFFF;
+     background-color: rgba(0,0,0,0.6);
 }

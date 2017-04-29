@@ -20,8 +20,9 @@ router.post('/register', function(req, res, next) {
 	var email = req.body.email;
 	var mobile = req.body.mobile;
 	var create_time = new Date();
-	console.log("user/register:username-->%s,password-->%s,email-->%s,mobile-->%s,create_time-->%s", username, password, email, mobile, create_time);
-       userDao.createUser(username, password, email, mobile, create_time, function(err,result){
+      var intorduce = req.body.intorduce;
+	console.log("user/register:username-->%s,password-->%s,email-->%s,mobile-->%s,create_time-->%s,intorduce-->%s", username, password, email, mobile, create_time, intorduce);
+       userDao.createUser(username, password, email, mobile, create_time, intorduce, function(err,result){
              if(err){
 	              console.error("register--%s",err.stack);
 	              return res.status(500).json({"error":"服务器内部错误","success":false});
@@ -60,7 +61,7 @@ router.post('/login', function(req,res,next) {
              }
              if (result.length > 0) {
              	       // console.log("登陆成功", result);
-                          req.session.userId = result[0].id;
+                     req.session.userId = result[0].id;
              	       res.status(200).json({"success":true,"data":"登陆成功"});
              } else {
              	       res.status(200).json({"success":false,"error":"用户名或密码错误"});
@@ -72,7 +73,7 @@ router.get('/getUserInfo', function(req,res,next) {
         var username = req.session.username;
         userDao.selectUser(username, function(err, result) {
               if(err){
-                    console.error("login--%s",err.stack);
+                    console.error("getUserInfo--%s",err.stack);
                     return res.status(500).json({"error":"服务器内部错误","success":false});
               }
               if (result.length > 0) {
@@ -93,9 +94,11 @@ router.post('/updateUserInfo', function(req, res, next) {
        var address = user.address;
        var birth = user.birth;
        var university = user.university;
-       userDao.updateUser(userId,username,email,mobile,address,birth,university, function(err, result) {
+       var intorduce = user.intorduce;
+       console.log("user/updateUserInfo:username-->%s,address-->%s,email-->%s,mobile-->%s,birth-->%s,university-->%s,intorduce-->%s", username, address, email, mobile, birth, university, intorduce);
+       userDao.updateUser(userId,username,email,mobile,address,birth,university, intorduce, function(err, result) {
               if (err) {
-                     console.error("login--%s",err.stack);
+                     console.error("updateUserInfo--%s",err.stack);
                      return res.status(500).json({"error":"服务器内部错误","success":false});
               } 
               if (result.affectedRows > 0) {
@@ -110,7 +113,7 @@ router.post('/revisepsd', function(req,res,next) {
         var newPsd = req.body.newPsd; 
         userDao.userLogin(username, function(err, result) {
              if(err){
-                  console.error("login--%s",err.stack);
+                  console.error("revisepsd--%s",err.stack);
                   return res.status(500).json({"error":"服务器内部错误","success":false});
              }
              if (result.length > 0) {
@@ -126,7 +129,7 @@ router.get('/getUserCourses', function(req, res, next) {
        console.log("users/getUserCourses:userId-->%s",userId);
        userDao.selectUserCourse(userId, function(err, result) {
              if(err){
-                  console.error("login--%s",err.stack);
+                  console.error("getUserCourses--%s",err.stack);
                   return res.status(500).json({"error":"服务器内部错误","success":false});
              }
              if (result.length > 0) {
@@ -154,27 +157,13 @@ router.get('/getUserLearnRecord', function(req, res, next) {
        console.log("users/getUserLearnRecord:userId-->%s", userId); 
        userDao.selectUserRecord(userId, function(err, result) {
              if(err){
-                  console.error("login--%s",err.stack);
+                  console.error("getUserLearnRecord--%s",err.stack);
                   return res.status(500).json({"error":"服务器内部错误","success":false});
              }
              if (result.length > 0) {
                   res.status(200).json({"success":true,"data":result});
              }
        });
-});
-//获取选定用户喜爱的插件资源
-router.get('/getUserFavoriteResouces', function(req,res,next) {
-        var userId = req.session.userId;
-        console.log("users/getUserFavoriteResouces:userId-->%s", userId);
-        bbsDao.selectUserFavoriteResources(userId, function(err, result) {
-              if(err){
-                    console.error("error--%s",err.stack);
-                    return res.status(500).json({"error":"服务器内部错误","success":false});
-              }
-              if (result.length > 0) {
-                         res.status(200).json({"success":true,"data":result});
-              }
-        });
 });
 // 获取用户发布的插件资源
 router.get('/getUserResouces', function(req,res,next) {
@@ -186,10 +175,164 @@ router.get('/getUserResouces', function(req,res,next) {
                     return res.status(500).json({"error":"服务器内部错误","success":false});
               }
               if (result.length > 0) {
-                         res.status(200).json({"success":true,"data":result});
+                      res.status(200).json({"success":true,"data":result});
+              } else {
+                      res.status(200).json({"success":false,"data":"该用户暂无发布任何资源"});
               }
         });
 });
+
+
+// 用户交友
+router.get('/getStranger', function(req,res,next) {
+       var userId = req.session.userId;
+       console.log("users/getStranger:userId-->%s", userId); 
+       async.waterfall([
+             function(callback) {
+                    userDao.selectStranger(userId, function(err, result) {
+                          callback(err, result);
+                    });
+             },
+             function(userList, callback) {
+                    async.each(userList, function(item, ecallback) {
+                          userDao.selectUserCourse(item.id, function(err, result1) {
+                                 if (result1.length > 0) {
+                                       item.course = result1;
+                                 } else {
+                                       item.course = [];
+                                 }
+                                 ecallback(null, item);
+                          });
+                    }, function(err) {
+                          // console.log("2", JSON.stringify(userList));
+                          callback(null, userList);
+                    });
+             }
+       ], function(err, result) {
+              // console.log("3", JSON.stringify(result));
+              res.status(200).json({"success":true,"data":result});
+       });
+       // userDao.selectStranger(userId, function(err, result) {
+       //       if(err){
+       //            console.error("getStranger--%s",err.stack);
+       //            return res.status(500).json({"error":"服务器内部错误","success":false});
+       //       }
+       //       if (result.length > 0) {
+       //             async.each(result, function(item, ecallback) {
+       //                    userDao.selectUserCourse(item.id, function(err, result1) {
+       //                           if (result1.length > 0) {
+       //                                 item.courselist = result1;
+       //                           }
+       //                           ecallback(item);
+       //                    });
+       //             }, function(err) {
+       //                    console.log(JSON.stringify(result));
+       //                    res.status(200).json({"success":true,"data":result});
+       //             });
+       //       }
+       // });     
+});
+//用户请求添加好友
+router.get('/requestFriends', function(req,res,next) {
+       var userId1 = req.session.userId;
+       var userId2 = req.query.friendId;
+       var status = 0;
+       console.log("users/requestFriends:userId1-->%s,userId2-->%s,status-->%s", userId1, userId2, status); 
+       userDao.insertFriend(userId1, userId2, status, function(err, result) {
+             if(err){
+                  console.error("requestFriends--%s",err.stack);
+                  return res.status(500).json({"error":"服务器内部错误","success":false});
+             }
+             if (result.affectedRows > 0) {
+                  res.status(200).json({"success":true,"data":result});
+             }
+       });
+});
+// 获取好友请求列表
+router.get('/getFriendRequests', function(req,res,next) {
+       var userId = req.session.userId;
+       console.log("users/getFriendRequests:userId-->%s", userId); 
+       userDao.selectFriendRequest(userId, function(err, result) {
+             if(err){
+                  console.error("getFriendRequests--%s",err.stack);
+                  return res.status(500).json({"error":"服务器内部错误","success":false});
+             }
+             if (result.length > 0) {
+                  res.status(200).json({"success":true,"data":result});
+             } else {
+                  res.status(200).json({"success":true,"data":0});
+             }
+       });
+});
+// 同意好友请求
+router.get('/accessFriend', function(req,res,next) {
+       var userId2 = req.session.userId;
+       var userId1 = req.query.friendId;
+       var status = 1;
+       console.log("users/accessFriend:userId1-->%s,userId2-->%s,status-->%s", userId1, userId2, status); 
+       userDao.updateFriendStatus(userId1, userId2, status, function(err, result) {
+             if(err){
+                  console.error("accessFriend--%s",err.stack);
+                  return res.status(500).json({"error":"服务器内部错误","success":false});
+             }
+             if (result.affectedRows > 0) {
+                  res.status(200).json({"success":true,"data":result});
+             }
+       });
+});
+// 获取用户的好友列表
+router.get('/getUserFriends', function(req,res,next) {
+       var userId = req.session.userId;
+       console.log("users/getUserFriends:userId-->%s", userId); 
+       async.waterfall([
+             function(callback) {
+                    async.parallel([
+                          function(ecallback) {
+                                userDao.getUserFriend1(userId, function(err, result) {
+                                      ecallback(err, result);
+                                });
+                          },
+                          function(ecallback) {
+                                userDao.getUserFriend2(userId, function(err, result) {
+                                      ecallback(err, result);
+                                });
+                          }
+                    ], function(err, results) {
+                          if (err) {
+                              console.log("error", err.stack);
+                          }
+                          // console.log(JSON.stringify(results));
+                          var list = [];
+                          results.forEach(function(item) {
+                                item.forEach(function(value) {
+                                      list.push(value);
+                                });
+                          });
+                          // console.log(JSON.stringify(list));
+                          callback(null, list);
+                    })
+             },
+             function(userList, callback) {
+                    async.each(userList, function(item, ecallback) {
+                          userDao.selectUserCourse(item.id, function(err, result1) {
+                                 if (result1.length > 0) {
+                                       item.course = result1;
+                                 } else {
+                                       item.course = [];
+                                 }
+                                 ecallback(null, item);
+                          });
+                    }, function(err) {
+                          // console.log("2", JSON.stringify(userList));
+                          callback(null, userList);
+                    });
+             }
+       ], function(err, result) {
+              res.status(200).json({"success":true,"data":result});
+       });
+});
+
+
 //获取ssession中的用户名
 router.get('/getSessionName', function(req,res,next){
         // console.log("/getSessionName");

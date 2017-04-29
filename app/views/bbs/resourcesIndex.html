@@ -8,10 +8,13 @@
                 <div class="col-md-3" ng-repeat="item in resourcesList">
                     <div class="resource-warp">
                           <div class="resource-img">
-                               <img src="/images/book.png">
+                               <!-- <img src="/images/book.png"> -->
+                               <img src="{{item.resourceImg}}">
                           </div>
                           <div class="resource-introduce">
-                               <h4>{{item.resourceName}}</h4>
+                               <a ui-sref="resourcesDetail({resourceId: item.id})" ng-click="addViewCount(item.id, item.viewCount)">
+                                   <h4>{{item.resourceName}}</h4>
+                               </a>
                                <small>{{item.resourceInfo}}</small>
                           </div>
                           <div class="resource-category">

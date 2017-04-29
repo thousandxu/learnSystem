@@ -1,0 +1,24 @@
+<div class="container">
+       <section class="user-stranger">
+             <div class="stranger-list-warp">
+                   <div class="stranger-warp" ng-repeat="item in strangerList" ng-if="item.id !== nowUserId">
+                          <div class="portrait"></div>
+                          <div class="info">
+                                <div class="userInfo">
+                                       <strong ng-bind="item.username"></strong
+                                       <i class="fa fa-mail fa-lg"></i>
+                                       <span ng-bind="item.email"></span>
+                                </div>
+                                <div class="userIntorduce">
+                                       <span ng-bind="item.intorduce"></span>
+                                </div>
+                                <div class="classes">
+                                       <span>学习课程：</span>
+                                       <span ng-bind="item.classes"></span>
+                                </div>
+                          </div>
+                          <button class="btn btn-success" ng-click="requestFriends(item.id)">加为好友</button>
+                   </div>
+             </div>
+       </section>
+</div>
