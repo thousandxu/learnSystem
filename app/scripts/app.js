@@ -2,7 +2,9 @@ angular.module('BlankApp',[
 	'ngAnimate',
 	'ngResource',
 	'ngMaterial',
-      	'ui.router'
+      	'ui.router',
+      	'ngImgCrop',
+      	'angularFileDownloader'
 ])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 	$urlRouterProvider.when("", "/index");

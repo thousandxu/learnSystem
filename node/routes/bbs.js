@@ -184,6 +184,27 @@ router.get('/getAllBooks', function(req,res,next) {
               }
         });
 });
+router.get('/downloadBook', function(req,res,next) {
+        var bookName = req.query.bookName;
+        // var filename = bookName + ".pdf";
+        // console.log("bbs/resources/downloadBook: filename-->%s", filename);
+        var filePath = "/home/thousand/test/learnSystem/node/resources/book/CSS.pdf.zip";
+        var filename = "CSS.pdf.zip";
+        // res.download(filepath, filename); 
+        // var fileName = req.params.fileName;
+        // var filePath = path.join(__dirname, fileName);
+        var stats = fs.statSync(filePath); 
+        if(stats.isFile()){
+              res.set({
+                     'Content-Type': 'application/octet-stream',
+                     'Content-Disposition': 'attachment; filename=' + filename,
+                     'Content-Length': stats.size
+              });
+              fs.createReadStream(filePath).pipe(res);
+        } else {
+              res.end(404);
+        }
+});
 
 
 module.exports = router;

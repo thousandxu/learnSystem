@@ -72,7 +72,35 @@
     width: 100%;
     height: 100%;
 }
-
+/*用户设置界面--头像设置的css*/
+.user-portrait-set {
+    margin-bottom: 10px;
+    border-bottom: 2px dotted #cecece;
+    padding: 15px 0;
+}
+.user-portrait-set .row{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.user-portrait-set .select-img {
+    margin-top: 5px;
+}
+.cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width:400px;
+    height:300px;
+}
+.user-portrait-set input{
+    display: inline-block;
+}
+.portrait-result {
+    font-size: 18px;
+    color: #349bf3;
+}
+.save-portrait{
+    margin-top: 10px;
+}
 /*用户学习课程页面css*/
 .user-course-warp {
     padding: 10px;
@@ -204,7 +232,13 @@
     float: left;
     display: inline-block;
     margin: 10px 25px;
-    box-shadow: 0 0 10px #a09898;;
+    box-shadow: 0 0 10px #a09898;
+    padding: 3px;
+}
+.stranger-warp .portrait img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }
 .stranger-warp .info {
     float: left;

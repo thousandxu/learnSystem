@@ -5,7 +5,8 @@
 		       	<div class="head_portrait_top">
 		       	</div>
 		       	<div class="head_portrait">
-		       		 <img src="/images/person.png" class="head_portrait_img">
+		       		 <img src="/images/person.png" class="head_portrait_img" ng-show="!portraitStatus">
+		       		 <img src="{{imgPath}}" class="head_portrait_img" ng-show="portraitStatus"/>
 		       	</div>
 		       	<div class="friend">
 		       		 <ul>

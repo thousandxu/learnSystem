@@ -95,8 +95,8 @@ angular.module('BlankApp')
       }
 }])
 //图书资源的Controller
-.controller('BooksIndexCtrl', ['$rootScope', '$scope', '$location', 'constantService','allBooks',
-      function($rootScope, $scope, $location, constantService, allBooks){
+.controller('BooksIndexCtrl', ['$rootScope', '$scope', '$location', 'constantService','allBooks','downloadBook',
+      function($rootScope, $scope, $location, constantService, allBooks, downloadBook){
       var href = $location.absUrl();
       $scope.nowResource = constantService.getSubName(href);
       $scope.categoryList = constantService.categoryList;
@@ -105,7 +105,8 @@ angular.module('BlankApp')
             allBooks.get({}, function(resp) {
                   console.log("图书资源", resp.data);
                   _.forEach(resp.data, function(item) {
-                        item.bookImg = "/resources/bookImg/" + item.id + ".png"
+                        item.bookImg = "/resources/bookImg/" + item.id + ".png";
+                        item.bookHref = "/resources/book/" + item.bookName + ".pdf";
                   });
                   $scope.allBooks = resp.data;
                   $scope.bookList = _.cloneDeep(resp.data);
@@ -122,7 +123,12 @@ angular.module('BlankApp')
              }
       }
 
-      $scope.bookDownload = function() {
+      $scope.bookDownload = function(name) {
             console.info("下载书籍");
+            // downloadBook.get({
+            //       bookName: name
+            // }, function(resp) {
+            //       console.log("下载书籍");
+            // })
       }
 }])

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('BlankApp')
-.controller('UserInfoIndexCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','getFriendRequests','getUserFriends',
-       function($rootScope, $scope, $http,$location, eventbus, getFriendRequests, getUserFriends){
+.controller('UserInfoIndexCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','getFriendRequests','getUserFriends', 'getPortrait',
+       function($rootScope, $scope, $http,$location, eventbus, getFriendRequests, getUserFriends, getPortrait){
         
        $scope.userManageList = [{
               view: '.setting',
@@ -33,17 +33,36 @@ angular.module('BlankApp')
               $scope.nowCall = option.name
        }
 
+       var getHeadPortrait = function() {
+              getPortrait.get({}, function(resp) {
+                    console.log(resp);
+                    if (resp.data[0].portrait) {
+                             $scope.portraitStatus = true;
+                             $scope.imgPath = resp.data[0].portrait;
+                    } else {
+                             $scope.portraitStatus = false;
+                    }
+             });
+       }
+       eventbus.onMsg("uploadPortrait_success", function() {
+              getHeadPortrait();
+       }, $scope);
+
        var initData = function() {
              // 已通过验证好友验证的用户好友
              getUserFriends.get({}, function(resp) {
-                    // console.log("用户好友", resp);
                     $scope.friendCount = resp.data.length;
              });
              // 好友请求
              getFriendRequests.get({}, function(resp) {
-                    // console.log(resp);
-                    $scope.requestCount = resp.data.length;
+                    if (resp.data.length > 0) {
+                         $scope.requestCount = resp.data.length;
+                    } else {
+                         $scope.requestCount = 0;
+                    }
+                    
              });
+             getHeadPortrait();
        }
        initData();
 
@@ -122,8 +141,8 @@ angular.module('BlankApp')
        initData();
 }])
 //用户信息设置 
-.controller('UserSettingCtrl', ['$rootScope', '$scope', '$http','eventbus','$mdDialog','getUserInfo','updateUserInfo',
-      function($rootScope, $scope, $http, eventbus, $mdDialog, getUserInfo, updateUserInfo){
+.controller('UserSettingCtrl', ['$rootScope', '$scope', '$http','eventbus','$mdDialog','getUserInfo','updateUserInfo', 'uploadPortrait',
+      function($rootScope, $scope, $http, eventbus, $mdDialog, getUserInfo, updateUserInfo, uploadPortrait){
       var init = function() {
             getUserInfo.get({}, function(resp) {
                    console.log(resp);
@@ -140,6 +159,33 @@ angular.module('BlankApp')
             }, function(resp) {
                  console.log(resp);
             })
+      }
+      $scope.myImage='';
+      $scope.myCroppedImage='';
+
+      var handleFileSelect=function(evt) {
+              var file = evt.currentTarget.files[0];
+              var reader = new FileReader();
+              reader.onload = function (evt) {
+                $scope.$apply(function($scope){
+                  $scope.myImage = evt.target.result;
+                });
+              };
+              reader.readAsDataURL(file);
+      };
+      angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+
+      $scope.savePortrait = function(myCroppedImage) {
+             uploadPortrait.get({
+                      imgData: myCroppedImage
+             }, function(resp) {
+                      console.log(resp);
+                      if (resp.success) {
+                             eventbus.emitMsg("message", resp.data);
+                             console.log("保存成功！");
+                             eventbus.emitMsg("uploadPortrait_success");
+                      }
+             })
       }
 }])
 //用户学习课程

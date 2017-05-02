@@ -11,12 +11,17 @@
       <div class="books-warp">
             <div class="row">
                   <div class="col-md-3" ng-repeat="book in bookList">
-                       <div class="book-warp" ng-click="bookDownload()" book-hover>
+                       <div class="book-warp" book-hover>
                            <div class="good-book" ng-if="book.good === 1">推荐</div>
                            <img src="{{book.bookImg}}" alt="图书">
                            <div class="txt">
                                 <h3>{{book.bookName}}</h3>
-                                <button class="btn">下载</button>
+                                <!-- <download-link href='AAA' headers='{"xxx":"yyy"}' mime='application/pdf'>
+                                      <button>下载</button>
+                                </download-link> -->
+                                <a href="{{book.bookHref}}" target="view_window">
+                                     <button class="btn" ng-click="bookDownload(book.bookName)">下载</button>
+                                </a>
                            </div>
                        </div>
                   </div>

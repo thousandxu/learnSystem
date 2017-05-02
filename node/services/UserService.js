@@ -19,6 +19,17 @@ function UserService(){
 		var sql = "select * from users where username=?";
 		sqlExcutor.excute(sql,option,callback);
 	}
+	// 保存用户头像路径
+	this.saveUserPortrait = function(userId, path, callback) {
+		var option = [path, userId];
+		var sql = "update users set portrait=? where id=?";
+		sqlExcutor.excute(sql,option,callback);
+	}
+	this.getUserPortrait = function(userId, callback) {
+		var option = [userId];
+		var sql = "select portrait from users where id=?";
+		sqlExcutor.excute(sql,option,callback);
+	}
 	//修改用户密码
 	this.setUserPsd = function(username, password, callback) {
 		var option = [password, username];

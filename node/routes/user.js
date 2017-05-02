@@ -11,6 +11,7 @@ var success={"success":true};
 var failure={"success":false};
 
 var fs = require('fs');
+var path = require('path');
 var async=require('async');
 
 /*用户注册*/
@@ -82,6 +83,92 @@ router.get('/getUserInfo', function(req,res,next) {
                          res.status(200).json({"success":false,"error":"用户不存在"});
               }
         });
+});
+// 储存用户头像文件
+router.get('/uploadPortrait', function(req,res,next) {
+        var userId = req.session.userId;
+        var imgData = req.query.imgData;
+        var base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
+        var dataBuffer = new Buffer(base64Data, 'base64');
+        var userImgFileName = userId + ".png";
+        console.log("user/uploadPortrait: userImgFileName-->%", userImgFileName);
+        console.log(__dirname);
+        var imgPath = "/home/thousand/test/learnSystem/app/resources/user/";
+        var finalPath = "/resources/user/" + userImgFileName;
+        // console.log(path.join("/home/thousand/test/learnSystem/node/public/", userImgFileName));
+        async.parallel([
+               function(callback) {
+                      fs.writeFile(path.join(imgPath, userImgFileName), dataBuffer, function(err) {
+                             if(err){
+                                    console.log(err);
+                                    // res.send(err);
+                             }else{
+                                    // res.send({success: true, data:"保存成功！"});
+                                    callback(null, null);
+                             }
+                      });
+               },
+               function(callback) {
+                      async.waterfall([
+                             function(ecallback) {
+                                    userDao.getUserPortrait(userId, function(err, result) {
+                                            ecallback(err, result)
+                                    });
+                             },
+                             function(list, ecallback) {
+                                    if (list[0].portrait) {
+                                            ecallback(null, null);
+                                    } else {
+                                            userDao.saveUserPortrait(userId, finalPath, function(err, result) {
+                                                   ecallback(err, result);
+                                            });
+                                    }
+                             }
+                      ], function(err, result) {
+                             if (!err) {
+                                    callback(null, null);
+                             }
+                      });
+               }
+        ], function(err, results) {
+               if (err) {
+                      console.log(err);
+                      res.send(err);
+               } else {
+                      res.send({success: true, data:"保存成功！"});
+               }
+        })
+});
+router.get('/getPortrait', function(req,res,next) {
+        var userId = req.session.userId;
+        console.log("user/getPortrait: userId-->%", userId);
+        userDao.getUserPortrait(userId, function(err, result) {
+               if (err) {
+                     console.error("getPortrait--%s",err.stack);
+                     return res.status(500).json({"error":"服务器内部错误","success":false});
+               } 
+               if (result.length > 0) {
+                     res.status(200).json({"success":true,"data": result});
+               } else {
+                     res.status(200).json({"success":false,"data": "该用户暂未设置头像"});
+               }
+        });
+        // var userImgFileName = userId + ".png";
+        // console.log("user/getPortrait: userImgFileName-->%", userImgFileName);
+        // console.log(__dirname + "/public/user");
+        // fs.readFile(path.join(__dirname + "/public/user", "3.png"), 'binary', function(err, data) {  
+        //        if (err) {  
+        //               console.log("读取用户头像失败", err);
+        //               throw err;  
+        //        } else {
+        //               console.log("读取用户头像成功");
+        //               var buffer = new Buffer(data);
+        //               res.setHeader("Content-Type", "image/png");
+        //               // res.status(200).json({"success":true,"data": buffer.toString()});
+        //               res.send({success: true, data: buffer.toString()});
+        //        }
+        //         // console.log('utf-8: ', data.toString());  
+        // });  
 });
 //更新用户信息
 router.post('/updateUserInfo', function(req, res, next) {

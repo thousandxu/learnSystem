@@ -17,6 +17,12 @@ angular.module('BlankApp')
               } 
         });
 }])
+.service('uploadPortrait', ['$resource', function($resource) {
+        return $resource('user/uploadPortrait');
+}])
+.service('getPortrait', ['$resource', function($resource) {
+        return $resource('user/getPortrait');
+}])
 .service('getUserInfo', ['$resource', function($resource) {
         return $resource('user/getUserInfo');
 }])
@@ -110,6 +116,10 @@ angular.module('BlankApp')
 .service('allBooks', ['$resource', function($resource) {
         return $resource('bbs/getAllBooks');
 }])
+.service('downloadBook', ['$resource', function($resource) {
+        return $resource('bbs/downloadBook');
+}])
+
 .service('sessionStore', ['$resource', function($resource) {
         return $resource('user/getSessionName');
 }])

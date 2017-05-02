@@ -1,7 +1,10 @@
 <div>
      <div class="stranger-list-warp">
            <div class="stranger-warp" ng-repeat="item in friendList">
-                  <div class="portrait"></div>
+                  <div class="portrait">
+                      <img ng-src="{{item.portrait}}" ng-show="item.portrait">
+                      <img src="/images/person.png" ng-hide="item.portrait">  
+                  </div>
                   <div class="info">
                         <div class="userInfo">
                                <strong ng-bind="item.username"></strong
