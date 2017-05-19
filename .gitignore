@@ -1,1 +1,3 @@
 app/resources/
+node/node_modules
+node/resources
