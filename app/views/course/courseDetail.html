@@ -1,20 +1,15 @@
 <div>
-       <!--  <div class="bb-container">
-               <div class="row">
-                     <div class="col-md-3"></div>
-                     <div class="col-md-6"></div>
-                     <div class="col-md-3"></div>
-               </div>
-        </div> -->
+        <div class="bb-container">
+        </div>
        <div class="container" style="padding: 30px 0;">
               <div class="row">
                      <div class="col-md-3" style="height: 230px;">
                            <div class="bb">
-                               <div>css</div>
+                               <img ng-src="{{nowCourse.courseImg}}">
                            </div>
                      </div>
                      <div class="col-md-6">
-                           <span ng-bind="nowCourse.courseInfo"></span>
+                           <span ng-bind="nowCourse.courseInfo" class="course-Info"></span>
                      </div>
               </div>
        </div>
@@ -24,7 +19,7 @@
                             <div class="chapter_header">
                                   <ol class="breadcrumb">
                                       <li><a href="#">课程首页</a></li>
-                                      <li><a href="#" ng-bind="nowCourse.courseName"></a></li>
+                                      <li><a><span ng-bind="nowCourse.courseName"></span></a></li>
                                   </ol>
                                   <button class="btn btn-sm btn-success">学习小组</button>
                             </div>
@@ -33,7 +28,9 @@
                                          <div class="node" ng-class="{nodeConnect: $index > 0}"></div>
                                          <div class="chapter">
                                               <span ng-bind="item.chapterName"></span>
-                                              <button class="btn btn-success" ng-click="learnChapter(item, $event)" ng-if="item.learnShow">学习</button>
+                                              <a href="/resources/video/css3介绍与基础语法.mp4"  target="view_window">
+                                                    <button class="btn btn-success" ng-click="learnChapter(item, $event)" ng-if="item.learnShow">学习</button>
+                                              </a>
                                               <button class="btn btn-success" ng-if="!item.learnShow" ng-disabled="!item.learnShow">
                                                     <i class="fa fa-lock fa-lg"></i>
                                               </button>
@@ -46,7 +43,9 @@
                      </div>
                      <div class="col-md-4">
                             <div class="chapter-userBox">
-                                  <div class="user-imgBox"></div>
+                                  <div class="user-imgBox">
+                                      <img ng-src="{{portrait}}" style="width: 100%; height: 100%;border-radius: 50%;">
+                                  </div>
                                   <div class="chapter-progress">
                                           <span>课程进度</span>
                                           <span>{{nowProgress}}/{{chapterList.length}}</span>

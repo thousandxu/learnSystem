@@ -132,3 +132,12 @@ angular.module('BlankApp')
             // })
       }
 }])
+// 插件资源详情的Controller
+.controller('GamesIndexCtrl', ['$rootScope', '$scope', '$location', '$stateParams', 'constantService',
+      function($rootScope, $scope, $location, $stateParams, constantService){
+      var href = $location.absUrl();
+      $scope.nowResource = constantService.getSubName(href);
+      
+
+      
+}])

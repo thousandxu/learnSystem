@@ -1,27 +1,15 @@
 <md-dialog style="width:1050px;height:700px;">
     <md-dialog-content>
         <div class="gummy-dialog-title">
-            <span>修改密码</span>
+            <span>课程视频</span>
             <i class="fa fa-close fa-lg" aria-hidden="true" ng-click="close()"></i>
         </div>
         <div class="gummy-dialog-vedio">
-            <div class="row">
-              <div class="col-md-9">
-                    <label style="line-height: 34px;">旧密码:</label>
-              </div>
-              <div class="col-md-3">
-                    <ul class="nav nav-pills nav-justified">
-                         <li ng-click="vedioRrightClick()" ng-class="{active:vedioRright === 'chapterlist'}"><i class="fa fa-align-left fa-lg"></i></li>
-                         <li ng-click="vedioRrightClick()" ng-class="{active:vedioRright === 'comment'}"><i class="fa fa-edit fa-lg"></i></li>
-                    </ul>
-                    <div ng-if="vedioRright === 'chapterlist'">
-                      
-                    </div>
-                    <div ng-if="vedioRright === 'comment'">
-                      
-                    </div>
-              </div>
-            </div>
+              <div class="flowplayer">
+                    <video>
+                       <source type="video/mp4" src="/resources/video/css3介绍与基础语法.mp4">
+                    </video>
+               </div>
         </div>
     </md-dialog-content>
 </md-dialog>

@@ -24,7 +24,10 @@ angular.module('BlankApp')
                  	case "books":
                  	   return "图书区";
                  	   break;
-                    case "detail":
+                     case "games":
+                         return "游戏区";
+                         break;
+                     case "detail":
                         return "详情";
                         break;
              }

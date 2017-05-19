@@ -25,8 +25,8 @@ angular.module('BlankApp')
             
 }])
 //点击查看单个课程章节的Controller
-.controller('CourseDetailCtrl', ['$rootScope', '$scope', '$http','eventbus','$location','$stateParams','getCourse','getChapters','courseSession','checkUserCourse','sessionStore','studyCourseStore','$mdDialog','learnRecord','updateProgress',
-      function($rootScope, $scope, $http,eventbus,$location, $stateParams,getCourse,getChapters,courseSession,checkUserCourse,sessionStore,studyCourseStore,$mdDialog,learnRecord,updateProgress){
+.controller('CourseDetailCtrl', ['$rootScope', '$scope', '$http','eventbus','$location','$stateParams','getCourse','getChapters','courseSession','checkUserCourse','sessionStore','studyCourseStore','$mdDialog','learnRecord','updateProgress','getPortrait',
+      function($rootScope, $scope, $http,eventbus,$location, $stateParams,getCourse,getChapters,courseSession,checkUserCourse,sessionStore,studyCourseStore,$mdDialog,learnRecord,updateProgress,getPortrait){
       console.log('courseId', $stateParams.courseId);
       var initData = function() {
             $scope.chapterList = [];
@@ -34,8 +34,8 @@ angular.module('BlankApp')
             getCourse.get({
                  courseId: $scope.courseId
             }, function(resp) {
-                 // console.log(resp);
-                 $scope.nowCourse = resp.data;
+                 console.log("当前课程信息",resp.data);
+                 $scope.nowCourse = resp.data[0];
             });
             checkUserCourse.get({
                  courseId: $scope.courseId,
@@ -83,6 +83,10 @@ angular.module('BlankApp')
                          initData();
                     });
             }
+            getPortrait.get({}, function(resp) {
+                  console.log("用户头像", resp.data);
+                  $scope.portrait = resp.data[0].portrait;
+            })
       }
       init();
 

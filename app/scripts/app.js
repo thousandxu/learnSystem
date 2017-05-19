@@ -31,10 +31,6 @@ angular.module('BlankApp',[
 		templateUrl: 'views/bbs/bbsIndex.html',
 		controller: 'BBSIndexCtrl'
 	})
-	// .state('experiment',{
-	// 	url: '/experiment',
-	// 	templateUrl: 'views/experiment/expriment.html'
-	// })
 	.state('resources',{
                            url: '/bbs/resources',
 		templateUrl: 'views/bbs/resourcesIndex.html',
@@ -53,6 +49,11 @@ angular.module('BlankApp',[
 		templateUrl: 'views/bbs/booksIndex.html',
 		controller: 'BooksIndexCtrl'
 	})
+	// .state('games',{
+              //            url: '/bbs/games',
+	// 	templateUrl: 'views/bbs/gamesIndex.html',
+	// 	controller: 'GamesIndexCtrl'
+	// })
 	.state('stranger',{
                            url: '/stranger',
 		templateUrl: 'views/user/userStranger.html',
