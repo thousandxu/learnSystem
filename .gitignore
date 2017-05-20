@@ -1,3 +1,4 @@
 app/resources/
+app/bower_components
 node/node_modules
 node/resources
