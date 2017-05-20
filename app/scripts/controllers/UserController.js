@@ -263,13 +263,17 @@ angular.module('BlankApp')
 .controller('UserStrangersCtrl', ['$rootScope', '$scope', 'eventbus', 'sessionStore', 'getStranger', 'requestFriends',
        function($rootScope, $scope, eventbus, sessionStore, getStranger, requestFriends){
        var getStrangerList = function() {
+             $scope.strangerList = [];
              getStranger.get({}, function(resp) {
                     console.log(resp);
                     if (resp.success) {
                           $scope.strangerList = resp.data;
                     }
                     _.forEach($scope.strangerList, function(item) {
-                          item.classes = "css,html";
+                          item.classes = "";
+                          _.forEach(item.course, function(course) {
+                               item.classes += course.courseName + " ";
+                          })
                     });
              });
        }
