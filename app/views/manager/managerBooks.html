@@ -1,0 +1,45 @@
+<div>
+      <div class="yq-setting-content">
+            <div  class="yq-setting-header">
+                   <div class="yq-search-warp">
+                         <i class="fa fa-search"></i>
+                         <input type="text" class="form-control yq-search-input" ng-model="keyword">
+                   </div>
+                   <div class="btn-group">
+                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="top: -1px;">
+                             {{nowCategory}} <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li ng-repeat="option in categoryList" ng-click="bookFilter(option)" ng-class="{active:nowCategory === option}">
+                                  <a ng-bind="option"></a>
+                            </li>
+                        </ul>
+                     </div>
+                   <button class="btn btn-info" ng-click="addBook($event)">新增图书</button>
+            </div>
+            <div>
+                   <table class="yq-service-table yq-table-hover">
+                          <thead class="yq-service-table-head">
+                              <tr>
+                                  <td><span class="yq-table-txt">图书分类</span></td>
+                                  <td><span class="yq-table-txt">图书名称</span></td>
+                                  <td><span class="yq-table-txt">是否推荐</span></td>
+                              </tr>
+                          </thead>
+                          <tbody class="yq-table-body">
+                              <tr ng-repeat="item in bookList|filter: keyword">
+                                  <td><span ng-bind="item.category" class="yq-txt-blue"></span></td>
+                                  <td><span ng-bind="item.bookName" class="yq-txt-blue"></span></td>
+                                  <td>
+                                        <span ng-if="item.good === 1" class="yq-txt-blue">是</span>
+                                        <span ng-if="item.good === 0" class="yq-txt-blue">否</span>
+                                  </td>
+                              </tr>
+                          </tbody>
+                   </table>
+                   <div class="yq-empry-table" ng-if="urlGroupList.length === 0">
+                      <span>暂未定义任何URL分组</span>
+                   </div>
+            </div>
+      </div>
+</div>

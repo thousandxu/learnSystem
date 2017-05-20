@@ -1,0 +1,106 @@
+<div>
+      <div class="yq-setting-content" ng-show="showCourse">
+            <div  class="yq-setting-header">
+                   <div class="yq-search-warp">
+                         <i class="fa fa-search"></i>
+                         <input type="text" class="form-control yq-search-input" ng-model="keyword">
+                   </div>
+                   <button class="btn btn-info" ng-click="addCourse()">新增课程</button>
+            </div>
+            <div>
+                   <table class="yq-service-table yq-table-hover">
+                          <thead class="yq-service-table-head">
+                              <tr>
+                                  <td><span class="yq-table-txt">课程名</span></td>
+                                  <td><span class="yq-table-txt">课程简介</span></td>
+                                  <td><span class="yq-table-txt">课程章节数</span></td>
+                                  <td><span class="yq-table-txt">操作</span></td>
+                              </tr>
+                          </thead>
+                          <tbody class="yq-table-body">
+                              <tr ng-repeat="item in courseList|filter: keyword">
+                                  <td>
+                                      <span ng-bind="item.courseName" class="yq-txt-blue" ng-hide="item.edit"></span>
+                                      <input type="text" ng-model="item.courseName" class="form-control" placeholder="课程名" ng-show="item.edit">
+                                  </td>
+                                  <td class="course-info-overlength">
+                                      <span ng-bind="item.courseInfo" class="yq-txt-blue" title="{{item.courseInfo}}" ng-hide="item.edit">
+                                            <!-- <md-tooltip md-direction="bottom">
+                                                    {{item.courseInfo}}
+                                            </md-tooltip> -->
+                                      </span>
+                                      <input type="text" ng-model="item.courseInfo" class="form-control" placeholder="课程简介" ng-show="item.edit">
+                                  </td>
+                                  <td>
+                                          <span ng-bind="item.chapterList.length" class="yq-txt-blue"></span>
+                                          <span ng-click="item.edit || showChapter(item)" class="yq-txt-blue" style="margin-left: 6px;outline: none;">详细</span>
+                                  </td>
+                                  <td class="yq-icon-td" ng-hide="item.edit">
+                                      <i class="fa fa-pencil" ng-click="edit(item)"></i>
+                                      <i class="fa fa-trash" ng-click="deleteCourse(item.courseId, $event)"></i>
+                                  </td>
+                                  <td ng-show="item.edit">
+                                      <button class="btn btn-info btn-sm" ng-click="update(item)">确定</button>
+                                      <button class="btn btn-default btn-sm" ng-click="cancel(item)">取消</button>
+                                  </td>
+                              </tr>
+                          </tbody>
+                   </table>
+                   <!-- <div class="yq-empry-table" ng-if="urlGroupList.length === 0">
+                      <span>暂未定义任何URL分组</span>
+                   </div> -->
+            </div>
+      </div>
+      <div class="yq-setting-content" ng-show="!showCourse">
+            <div  class="yq-setting-header">
+                   <div class="yq-search-warp">
+                         <i class="fa fa-search"></i>
+                         <input type="text" class="form-control yq-search-input" ng-model="chapterKeyword">
+                   </div>
+                   <button class="btn btn-info" ng-click="returnCourse()">返回</button>
+            </div>
+            <div>
+                   <table class="yq-service-table yq-table-hover">
+                          <thead class="yq-service-table-head">
+                              <tr>
+                                  <td><span class="yq-table-txt">课程名</span></td>
+                                  <td><span class="yq-table-txt">章节ID</span></td>
+                                  <td><span class="yq-table-txt">章节名称</span></td>
+                                  <td><span class="yq-table-txt">章节文件</span></td>
+                                  <td><span class="yq-table-txt">操作</span></td>
+                              </tr>
+                          </thead>
+                          <tbody class="yq-table-body">
+                              <tr ng-repeat="item in chapterList|filter: chapterKeyword">
+                                  <td><span ng-bind="nowCourseName" class="yq-txt-blue"></span></td>
+                                  <td>
+                                          <span ng-bind="item.chapterId" class="yq-txt-blue"></span>
+                                  </td>
+                                  <td>
+                                          <span ng-bind="item.chapterName" class="yq-txt-blue" ng-hide="item.edit"></span>
+                                          <input type="text" ng-model="item.chapterName" class="form-control" placeholder="章节名称" ng-show="item.edit">
+                                  </td>
+                                  <td>
+                                          <span ng-bind="item.chapterName" class="yq-txt-blue" ng-hide="item.edit"></span>
+                                          <input type="file" ng-show="item.edit">
+                                  </td>
+                                  <td class="yq-icon-td" ng-hide="item.edit">
+                                      <i class="fa fa-pencil" ng-click="edit(item)"></i>
+                                      <i class="fa fa-trash" ng-click="deleteChapter(item.id, $event)"></i>
+                                  </td>
+                                  <td ng-show="item.edit">
+                                      <button class="btn btn-info btn-sm" ng-click="updateChapter(item)">确定</button>
+                                      <button class="btn btn-default btn-sm" ng-click="chapterCancel(item, $index)">取消</button>
+                                  </td>
+                              </tr>
+                          </tbody>
+                   </table>
+                   <div class="yq-empry-table" ng-if="chapterList.length === 0">
+                      <span>该课程暂无任何章节</span>
+                   </div>
+                   <div class="add-chapter">
+                      <button class="btn btn-info" ng-click="addChapter()">增加课程章节</button>
+                   </div>
+            </div>
+      </div>   
+</div>

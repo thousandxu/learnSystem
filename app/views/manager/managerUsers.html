@@ -1,0 +1,65 @@
+<div>
+      <div class="yq-setting-content">
+            <div  class="yq-setting-header">
+                   <div class="yq-search-warp">
+                         <i class="fa fa-search"></i>
+                         <input type="text" class="form-control yq-search-input" ng-model="keyword">
+                   </div>
+                   <button class="btn btn-info" ng-click="clickToShowAddTag($event)">新增用户</button>
+            </div>
+            <div>
+                   <table class="yq-service-table yq-table-hover">
+                          <thead class="yq-service-table-head">
+                              <tr>
+                                  <td>
+                                        <!-- <span class="yq-table-set-icon yq-table-icon6"></span> -->
+                                        <span class="yq-table-txt">用户头像</span>
+                                  </td>
+                                  <td>
+                                        <!-- <span class="fa fa-tag"></span> -->
+                                        <span class="yq-table-txt">用户名称</span>
+                                  </td>
+                                  <td>
+                                        <!-- <span class="yq-table-set-icon yq-table-icon1"></span> -->
+                                        <span class="yq-table-txt">用户邮箱</span>
+                                  </td>
+                                  <td>
+                                        <!-- <span class="yq-table-set-icon yq-table-icon1"></span> -->
+                                        <span class="yq-table-txt">用户手机号</span>
+                                  </td>
+                                  <td>
+                                        <!-- <span class="yq-table-set-icon yq-table-icon6"></span> -->
+                                        <span class="yq-table-txt">创建日期</span>
+                                  </td>
+                                  <td>
+                                        <!-- <span class="yq-table-set-icon yq-table-icon7"></span> -->
+                                        <span class="yq-table-txt">学习课程</span>
+                                  </td>
+                              </tr>
+                          </thead>
+                          <tbody class="yq-table-body">
+                              <tr ng-repeat="item in usersList|filter: keyword">
+                                  <td>
+                                         <div class="manager-user-img">
+                                              <img ng-src="{{item.portrait}}" ng-if="item.portrait">
+                                              <img ng-src="/images/person.png" ng-hide="item.portrait">
+                                         </div>
+                                  </td>
+                                  <td><span ng-bind="item.username" class="yq-txt-blue"></span></td>
+                                  <td><span ng-bind="item.email" class="yq-txt-blue"></span></td>
+                                  <td><span ng-bind="item.mobile" class="yq-txt-blue"></span></td>
+                                  <td><span ng-bind="item.create_time" class="yq-txt-blue"></span></td>
+                                  <!-- <td><span ng-bind="item.address" class="yq-txt-blue"></span></td> -->
+                                  <td>
+                                         <span ng-bind="item.courseNames" ng-if="item.courseNames"></span>
+                                         <span ng-hide="item.courseNames">暂无学习课程</span>
+                                  </td>
+                              </tr>
+                          </tbody>
+                   </table>
+                   <div class="yq-empry-table" ng-if="urlGroupList.length === 0">
+                      <span>暂未定义任何URL分组</span>
+                   </div>
+            </div>
+      </div>
+</div>

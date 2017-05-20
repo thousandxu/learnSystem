@@ -99,5 +99,35 @@ angular.module('BlankApp',[
 		templateUrl: 'views/user/userResources.html',
 		controller: 'UserResourcesCtrl'
 	})
+	.state('managerLogin', {
+		url: '/managerLogin',
+		templateUrl: 'views/manager/managerLogin.html',
+		controller: 'managerLoginCtrl'
+	})
+	.state('manager', {
+		url: '/manager',
+		templateUrl: 'views/manager/managerIndex.html',
+		controller: 'managerIndexCtrl'
+	})
+	.state('manager.users',{
+		url: '/users',
+		templateUrl: 'views/manager/managerUsers.html',
+		controller: 'managerUsersCtrl'
+	})
+	.state('manager.course',{
+		url: '/course',
+		templateUrl: 'views/manager/managerCourse.html',
+		controller: 'managerCourseCtrl'
+	})
+	.state('manager.resources',{
+		url: '/resources',
+		templateUrl: 'views/manager/managerResources.html',
+		controller: 'managerResourcesCtrl'
+	})
+	.state('manager.books',{
+		url: '/books',
+		templateUrl: 'views/manager/managerBooks.html',
+		controller: 'managerBooksCtrl'
+	})
 
 }]);

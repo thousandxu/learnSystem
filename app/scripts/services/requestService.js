@@ -126,4 +126,38 @@ angular.module('BlankApp')
 .service('logoutStore', ['$resource', function($resource) {
         return $resource('user/logout');
 }])
+.service('managerStore', ['$resource', function($resource) {
+        return {
+               // 管理员登录
+               managerLogin: function() {
+                      return $resource('manager/login');
+               },
+               // 管理员session
+               managerSession:  function() {
+                      return $resource('manager/getManagerSession');
+               },
+               // 获取所有课程信息
+               allCourses: function() {
+                      return $resource('manager/getAllCourses');
+               },
+               // 增加课程
+               addCourse: function() {
+                      return $resource('manager/addCourse');
+               },
+               delCourse: function() {
+                      return $resource('manager/delCourse');
+               },
+               updateCourse: function() {
+                      return $resource('manager/updateCourse');
+               },
+               // 获取所有用户列表
+               allUser: function() {
+                      return $resource('manager/getAllUsers');
+               },
+               // 增加书籍
+               addBook: function() {
+                      return $resource('manager/addBook');
+               }
+         }
+}])
 ;

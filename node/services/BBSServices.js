@@ -54,6 +54,12 @@ function BbsService() {
               var sql = "delete from userResources where resourceId=? and userId=?";
               sqlExcutor.excute(sql, option, callback);
        }
+       // bbs 上传资源
+       this.uploadUserResources = function(resourceName, resourceInfo, keyWord, viewCount, favoriteCount, ownerId, ownerType, resourceImg, callback) {
+               var option = [resourceName, resourceInfo, keyWord, viewCount, favoriteCount, ownerId, ownerType, resourceImg];
+               var sql = "insert into resources(resourceName, resourceInfo, keyWord, viewCount, favoriteCount, ownerId, ownerType, resourceImg) values(?,?,?,?,?,?,?,?)";
+               sqlExcutor.excute(sql,option,callback);
+        }
 
        // 查询所有图书资源
        this.selectAllBook = function(callback) {

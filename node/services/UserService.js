@@ -57,10 +57,14 @@ function UserService(){
 	this.selectUserNote = function() {
 
 	}
+	this.getAllUsers = function(callback) {
+		var sql = "select * from users";
+		sqlExcutor.excute(sql, callback);
+	}
 	// 用户交友相关操作
 	// 针对用户获取相应的陌生人
 	this.selectStranger = function(userId, callback) {
-             var option = [userId];
+              var option = [userId];
 		var sql = "select users.* from users, friends where friends.userId2!=users.id and friends.userId1=?";
 		sqlExcutor.excute(sql, option, callback);
 	}

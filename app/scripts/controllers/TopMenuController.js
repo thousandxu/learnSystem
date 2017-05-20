@@ -4,21 +4,41 @@
 
 // var app = angular.module('BlankApp', []);
 angular.module('BlankApp')
-.controller('TopMenuCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','$mdDialog','sessionStore','logoutStore',
-      function($rootScope, $scope, $http,$location, eventbus, $mdDialog, sessionStore, logoutStore){
-        $scope.ifLogin = false;
+.controller('TopMenuCtrl', ['$rootScope', '$scope', '$http','$location','eventbus','$mdDialog','sessionStore','logoutStore', 'managerStore',
+      function($rootScope, $scope, $http,$location, eventbus, $mdDialog, sessionStore, logoutStore, managerStore){
+        $scope.ifUserLogin = false;
+        $scope.ifManagerLogin = false;
         var init = function(){
               sessionStore.get({},function(response){
                      // console.info(response);
                      if (response.success) {
                          $scope.username = response.name;
-                         $scope.ifLogin = true;
+                         $scope.ifUserLogin = true;
                      } else {
-                         $scope.ifLogin = false;
+                         $scope.ifUserLogin = false;
+                     }
+              });
+              managerStore.managerSession().get({}, function(resp) {
+                     if (resp.success) {
+                         $scope.managerName = resp.name;
+                         $scope.ifManagerLogin = true;
+                     } else {
+                         $scope.ifManagerLogin = false;
                      }
               });
         }
         init();
+        $scope.showUser = true;
+        // 监控路由地址变化,根据路由地址判断是否显示tag filter按钮
+        $rootScope.$on('$locationChangeSuccess',function (event,url) {
+                var temp = url.lastIndexOf('/') + 1;
+                var subUrl = url.substring(temp);
+                if (subUrl === "managerLogin") {
+                      $scope.showUser = false;
+                } else {
+                      $scope.showUser = true;
+                }
+        });
         //显示用户登录界面
         $scope.showLogin = function(ev){
         	 $mdDialog.show({

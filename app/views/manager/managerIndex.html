@@ -1,0 +1,12 @@
+<div class="container">
+        <div class="user_wrap_left">
+               <ul class="nav nav-pills nav-stacked">
+                    <li ng-repeat="option in userManageList" style="text-align: center;">
+                        <a ui-sref-active="active" ui-sref="{{option.view}}">{{option.name}}</a>
+                    </li>
+               </ul>
+        </div>  
+        <div class="user_wrap_right">
+             <div ui-view></div>
+        </div>
+</div>

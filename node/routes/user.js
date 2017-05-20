@@ -299,25 +299,6 @@ router.get('/getStranger', function(req,res,next) {
               // console.log("3", JSON.stringify(result));
               res.status(200).json({"success":true,"data":result});
        });
-       // userDao.selectStranger(userId, function(err, result) {
-       //       if(err){
-       //            console.error("getStranger--%s",err.stack);
-       //            return res.status(500).json({"error":"服务器内部错误","success":false});
-       //       }
-       //       if (result.length > 0) {
-       //             async.each(result, function(item, ecallback) {
-       //                    userDao.selectUserCourse(item.id, function(err, result1) {
-       //                           if (result1.length > 0) {
-       //                                 item.courselist = result1;
-       //                           }
-       //                           ecallback(item);
-       //                    });
-       //             }, function(err) {
-       //                    console.log(JSON.stringify(result));
-       //                    res.status(200).json({"success":true,"data":result});
-       //             });
-       //       }
-       // });     
 });
 //用户请求添加好友
 router.get('/requestFriends', function(req,res,next) {

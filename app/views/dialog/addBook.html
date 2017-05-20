@@ -1,0 +1,66 @@
+<md-dialog style="width:550px;height:400px;">
+    <md-dialog-content>
+        <div class="gummy-dialog-title">
+            <span>上传图书</span>
+            <i class="fa fa-close fa-lg" aria-hidden="true" ng-click="close()"></i>
+        </div>
+        <div class="gummy_dialog_content" style="margin-top: 10px;">
+                <div class="row">
+                    <div class="col-md-4">
+                         <label class="login_label">图书分类</label>
+                    </div>
+                    <div class="col-md-8">
+                         <div class="btn-group">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="top: 0;">
+                                     {{nowCategory}} <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li ng-repeat="option in categoryList" ng-click="selectCategory(option)" ng-class="{active:nowCategory === option}">
+                                          <a ng-bind="option"></a>
+                                    </li>
+                                </ul>
+                          </div>
+                     </div>
+                     <div class="gummy_warn" ng-show="showError" style="top: 15px;left: 135px;width: 160px;">
+                           <span ng-bind="errorMsg"></span>
+                     </div>
+                 </div>
+                 <div class="row">
+                      <div class="col-md-4">
+                           <label class="login_label">图书名称</label>
+                      </div>
+                      <div class="col-md-8">
+                           <input placeholder="请输入用户名称" type="text" class="form-control" ng-model="bookName"/>
+                      </div>
+                 </div>
+                 <div class="row">
+                      <div class="col-md-4">
+                           <label class="login_label">是否推荐</label>
+                      </div>
+                      <div class="col-md-8">
+                           <input type="checkbox" ng-model="ifGood" style="margin-top: 10px;" />
+                      </div>
+                 </div>
+                <!--  <div class="row">
+                      <div class="col-md-4">
+                           <label class="login_label">图书图片</label>
+                      </div>
+                      <div class="col-md-8">
+                           <input type="file" id="fileInput"/>
+                      </div>
+                  </div> -->
+                 <div class="row">
+                      <div class="col-md-4">
+                           <label class="login_label">图书文件</label>
+                      </div>
+                      <div class="col-md-8">
+                           <input type="file" id="fileInput"/>
+                      </div>
+                  </div>
+        </div>
+         <div class="save-result" style="padding:10px 0 0 0;margin:10px 110px">
+            <button type="button" class="btn btn-info gummy_line_none" ng-click="saveBook()">上传</button>
+            <button type="button" class="btn btn-warning gummy_line_none" ng-click="close()" style="margin-left: 15px;">取消</button>
+        </div>
+    </md-dialog-content>
+</md-dialog>
