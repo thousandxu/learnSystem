@@ -162,6 +162,22 @@ router.get('/addBook', function(req,res,next) {
            }
       });
 });
+// 删除课程
+router.get('/deleteBook', function(req,res,next) {
+       var id = req.query.id;
+       console.log("manager/deleteBook: id-->%s", id);
+       managerDao.deleteBook(id, function(err, result) {
+             if(err){
+                 console.error("deleteBook--%s",err.stack);
+                 return res.status(500).json({"error":"服务器内部错误","success":false});
+             }
+             if (result.affectedRows > 0) {
+                 res.status(200).json(success);
+              } else {
+                 res.status(200).json(failure);
+              }
+       })
+});
 //获取ssession中的管理员账号和管理员Id
 router.get('/getManagerSession', function(req,res,next){
         // console.log("/getSessionName");

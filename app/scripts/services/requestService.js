@@ -157,6 +157,9 @@ angular.module('BlankApp')
                // 增加书籍
                addBook: function() {
                       return $resource('manager/addBook');
+               },
+               deleteBook: function() {
+                      return $resource('manager/deleteBook');
                }
          }
 }])

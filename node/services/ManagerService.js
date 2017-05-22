@@ -29,6 +29,11 @@ function ManagerService(){
                var sql = "insert into books(category, bookName, good) values(?,?,?)";
                sqlExcutor.excute(sql,option,callback);
         }
+        this.deleteBook = function(id, callback) {
+               var option = [id];
+               var sql = "delete from books where id=?";
+               sqlExcutor.excute(sql,option,callback);
+        }
 
 
 }

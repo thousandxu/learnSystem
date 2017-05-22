@@ -73,14 +73,19 @@ angular.module('BlankApp')
         $scope.logout = function() {
              logoutStore.get({}, function(resp) {
                     if (resp.success) {
-                          $scope.ifLogin = false;
+                          $scope.ifUserLogin = false;
+                          $scope.ifManagerLogin = false;
                     }
              })
         }
 
         eventbus.onMsg("login_success",function(v,m){
               $scope.username = m;
-              $scope.ifLogin = true;
+              $scope.ifUserLogin = true;
+        },$scope);
+        eventbus.onMsg("manager_login_success",function(v,m){
+              $scope.username = m;
+              $scope.ifManagerLogin = true;
         },$scope);
 }])
 //用户登录模块

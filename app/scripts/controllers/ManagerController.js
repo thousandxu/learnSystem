@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('BlankApp')
-.controller('managerLoginCtrl', ['$rootScope', '$scope', '$location', 'managerStore', '$state',
-       function($rootScope, $scope, $location, managerStore, $state){
+.controller('managerLoginCtrl', ['$rootScope', '$scope', '$location', 'managerStore', '$state', 'eventbus',
+       function($rootScope, $scope, $location, managerStore, $state, eventbus){
         console.log("manager login")
         $scope.clickLogin = function() {
                managerStore.managerLogin().get({
@@ -12,6 +12,7 @@ angular.module('BlankApp')
                        console.log(resp);
                        if (resp.success) {
                             $state.go('manager');
+                            eventbus.emitMsg("manager_login_success", $scope.name);
                        }
                })
         }
@@ -25,15 +26,17 @@ angular.module('BlankApp')
                 name: '用户管理'
          }, {
                 view: '.course',
-                icon: 'fa-eye',
+                icon: 'fa-cubes',
                 name: '课程管理'
-         }, {
-                view:'.resources',
-                icon:'fa-trash',
-                name:'资源管理'
-         }, {
+         },
+         //  {
+         //        view:'.resources',
+         //        icon:'fa-trash',
+         //        name:'资源管理'
+         // },
+          {
                 view: '.books',
-                icon: 'fa-signal',
+                icon: 'fa-book',
                 name: '图书管理'
          }];
         
@@ -69,11 +72,13 @@ angular.module('BlankApp')
                      _.forEach($scope.courseList, function(item) {
                             item.edit = false;
                             if (item.chapterList.length > 0) {
-                                 _.forEach(item.chapterList, function(chpater) {
-                                      chapter.edit = false;
+                                 _.forEach(item.chapterList, function(citem) {
+                                      citem.edit = false;
+                                      citem.chapterFileName = citem.chapterName + ".mp4";
                                  });
                             }
                      });
+                     console.log($scope.courseList);
               })
        }
        init();
@@ -149,6 +154,7 @@ angular.module('BlankApp')
               $scope.nowCourseId = item.courseId;
               $scope.nowCourseName = item.courseName;
               $scope.chapterList = item.chapterList;
+              console.log($scope.chapterList);
        }
 
        $scope.returnCourse = function() {
@@ -160,11 +166,23 @@ angular.module('BlankApp')
                    courseId: $scope.nowCourseId,
                    chapterId: $scope.chapterList.length + 1,
                    chapterName: "",
+                   chapterFileName: "",
                    // type: 1,
                    // path: "",
                    add: true,
                    edit: true
               })
+       }
+      $scope.fileChanged = function(ele){  
+            $scope.files = ele.files;  
+            var idx = ele.parentElement.parentElement.rowIndex - 1;
+            $scope.chapterList[idx].chapterFileName = $scope.files[0].name;
+            $scope.$apply();  
+      } 
+
+       $scope.updateChapter = function(item) {
+              console.log(item);
+              item.add = item.edit = false;
        }
 
        $scope.chapterCancel = function(item, idx) {
@@ -223,6 +241,29 @@ angular.module('BlankApp')
                 escapeToClose: false,
            });
        }
+
+      $scope.deleteBook = function(item, ev) {
+              var confirm = $mdDialog.confirm()
+                .parent(angular.element(document.body))
+                .title('删除图书')
+                .content('你确定要删除该图书？')
+                .ariaLabel('Lucky day')
+                .ok('确定')
+                .cancel('取消')
+                .targetEvent(ev);
+             $mdDialog.show(confirm).then(function() {
+                  managerStore.deleteBook().get({
+                        id: item.id
+                  }, function(resp) {
+                        if (resp.success) {
+                             eventbus.emitMsg('addBook_success');
+                             $mdDialog.cancel();
+                        } else {
+                             eventbus.emitMsg('message', "删除失败");
+                        }
+                  });
+             });
+      }
 }])
 .controller('AddBookCtrl', ['$rootScope', '$scope', 'managerStore', 'allBooks', '$mdDialog','eventbus',
        function($rootScope, $scope, managerStore, allBooks, $mdDialog, eventbus){
@@ -260,6 +301,4 @@ angular.module('BlankApp')
                     }
               });
         }
-  
-
 }])

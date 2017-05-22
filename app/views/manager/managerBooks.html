@@ -24,6 +24,7 @@
                                   <td><span class="yq-table-txt">图书分类</span></td>
                                   <td><span class="yq-table-txt">图书名称</span></td>
                                   <td><span class="yq-table-txt">是否推荐</span></td>
+                                  <td><span class="yq-table-txt">操作</span></td>
                               </tr>
                           </thead>
                           <tbody class="yq-table-body">
@@ -33,6 +34,9 @@
                                   <td>
                                         <span ng-if="item.good === 1" class="yq-txt-blue">是</span>
                                         <span ng-if="item.good === 0" class="yq-txt-blue">否</span>
+                                  </td>
+                                  <td class="yq-icon-td">
+                                        <i class="fa fa-trash" ng-click="deleteBook(item, $event)"></i>
                                   </td>
                               </tr>
                           </tbody>
