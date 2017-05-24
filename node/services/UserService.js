@@ -42,6 +42,11 @@ function UserService(){
 		var sql = "update users set username=?,email=?,mobile=?,address=?,birth=?,university=?,intorduce=? where id=?";
 		sqlExcutor.excute(sql, option, callback);
 	}
+	this.selectUserCourses = function(userId, callback) {
+		var option = [userId];
+		var sql = "select userCourse.*, course.courseName from userCourse,course where userId=? and userCourse.courseId=course.courseId";
+		sqlExcutor.excute(sql, option, callback);
+	}
 	//查看用户学习的所有课程
 	this.selectUserCourse = function(userId, callback) {
 		var option = [userId];
@@ -61,9 +66,9 @@ function UserService(){
 	// 用户交友相关操作
 	// 针对用户获取相应的陌生人
 	this.selectStranger = function(userId, callback) {
-              var option = [userId];
+              // var option = [userId];
 		var sql = "select * from users";
-		sqlExcutor.excute(sql, option, callback);
+		sqlExcutor.excute(sql, null, callback);
 	}
 	this.insertFriend = function(userId1, userId2, status, callback) {
 		var option = [userId1, userId2, status];

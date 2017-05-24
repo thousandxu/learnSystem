@@ -198,7 +198,7 @@ angular.module('BlankApp')
                       item.progress = (item.chapterId / item.courseAllChapter) * 100 + "%";
                   });
                   $scope.userCourse = resp.data;
-             })
+             });
        }
        initData();
 }])

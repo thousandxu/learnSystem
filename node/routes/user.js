@@ -214,16 +214,16 @@ router.post('/revisepsd', function(req,res,next) {
 router.get('/getUserCourses', function(req, res, next) {
        var userId = req.session.userId;
        console.log("users/getUserCourses:userId-->%s",userId);
-       userDao.selectUserCourse(userId, function(err, result) {
+       userDao.selectUserCourses(userId, function(err, result) {
              if(err){
                   console.error("getUserCourses--%s",err.stack);
                   return res.status(500).json({"error":"服务器内部错误","success":false});
              }
              if (result.length > 0) {
                    async.each(result, function(item, ecallback) {
-                         courseDao.selectChapter(item.courseId, function(error, result) {
-                               if(result.length > 0) {
-                                    item.courseAllChapter = result.length;
+                         courseDao.selectChapter(item.courseId, function(error, result2) {
+                               if(result2.length > 0) {
+                                    item.courseAllChapter = result2.length;
                                }
                                ecallback(error, item);
                          });
