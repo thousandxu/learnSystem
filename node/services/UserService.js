@@ -44,7 +44,7 @@ function UserService(){
 	}
 	this.selectUserCourses = function(userId, callback) {
 		var option = [userId];
-		var sql = "select userCourse.*, course.courseName from userCourse,course where userId=? and userCourse.courseId=course.courseId";
+		var sql = "select userCourse.*, course.* from userCourse,course where userId=? and userCourse.courseId=course.courseId";
 		sqlExcutor.excute(sql, option, callback);
 	}
 	//查看用户学习的所有课程
