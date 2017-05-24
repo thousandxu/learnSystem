@@ -19,10 +19,10 @@ var d = domain.create();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(express.static('../app'));
+app.use(express.static('../app',{maxAge:60000}));
 
 // app.use(express.methodOverride()); //connect内建的中间件,协助处理POST请求,伪装PUT,DELETE和其他HTTP方法
-app.use(express.static(__dirname + '/public'));  //connect内建的中间件,将根目录下的public文件夹作为存放静态文件的目录
+// app.use(express.static(__dirname + '/public'));  //connect内建的中间件,将根目录下的public文件夹作为存放静态文件的目录
 app.use(session({secret:"test",saveUninitialized:true,resave:true}));
 
 d.on('error', function(err) {
@@ -52,6 +52,7 @@ d.run(function() {
         httpServer.listen(9898,function(){
           console.log('start web ');
         });
+        httpServer.timeout=600000;
         // Routes
         var userRouter = require("./routes/user.js");
         var courseRouter = require("./routes/course.js");

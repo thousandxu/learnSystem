@@ -5,7 +5,7 @@ function BbsService() {
        this.selectAllResources = function(callback) {
               // var option = [userId];
               var sql = "select resources.*, users.username from resources, users where resources.ownerId=users.id";
-              sqlExcutor.excute(sql, callback);
+              sqlExcutor.excute(sql, null, callback);
        }
        // 获取指定插件资源详情
        this.selectResource = function(id, callback) {
@@ -64,7 +64,7 @@ function BbsService() {
        // 查询所有图书资源
        this.selectAllBook = function(callback) {
               var sql = "select * from books";
-              sqlExcutor.excute(sql, callback);
+              sqlExcutor.excute(sql, null, callback);
        }
 
 

@@ -55,12 +55,16 @@ router.get('/getAllUsers', function(req,res,next) {
                                  ecallback(null, item);
                           });
                     }, function(err) {
-                          // console.log("2", JSON.stringify(userList));
-                          callback(null, userList);
+                          callback(err, userList);
                     });
              }
        ], function(err, result) {
-              res.status(200).json({"success":true,"data":result});
+             if (!err) {
+                  res.status(200).json({"success":true,"data":result});
+             } else {
+                  res.status(200).json({"success":true,"data":"请求失败"});
+             }
+              
        });
 });
 // 获取所有课程
@@ -69,6 +73,7 @@ router.get('/getAllCourses', function(req, res, next) {
       async.waterfall([
              function(callback) {
                     courseDao.selectAllCourses(function(err, result) {
+                      // console.log("getAllCourses",result);
                           callback(err, result);
                     });
              },
@@ -83,7 +88,6 @@ router.get('/getAllCourses', function(req, res, next) {
                                  ecallback(null, item);
                           });
                     }, function(err) {
-                          // console.log("2", JSON.stringify(userList));
                           callback(null, courseList);
                     });
              }

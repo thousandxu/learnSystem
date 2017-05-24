@@ -234,7 +234,6 @@ router.get('/getUserCourses', function(req, res, next) {
                    }); 
              }
        });
-
 });
 //获取用户学习记录
 router.get('/getUserLearnRecord', function(req, res, next) {

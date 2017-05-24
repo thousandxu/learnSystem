@@ -45,7 +45,7 @@ function UserService(){
 	//查看用户学习的所有课程
 	this.selectUserCourse = function(userId, callback) {
 		var option = [userId];
-		var sql = "select * from userCourse, course where userId=? and userCourse.courseId=course.courseId";
+		var sql = "select course.* from userCourse, course where userId=? and userCourse.courseId=course.courseId";
 		sqlExcutor.excute(sql, option, callback);
 	}
 	//获取用户在某个时间范围的学习记录
@@ -54,18 +54,15 @@ function UserService(){
 		var sql = "select learnRecord.*, course.courseName, chapter.chapterName from learnRecord, course, chapter where learnRecord.userId=? and learnRecord.courseId = course.courseId and learnRecord.courseId = chapter.courseId and learnRecord.chapterId = chapter.chapterId";
 		sqlExcutor.excute(sql, option, callback);
 	}
-	this.selectUserNote = function() {
-
-	}
 	this.getAllUsers = function(callback) {
 		var sql = "select * from users";
-		sqlExcutor.excute(sql, callback);
+		sqlExcutor.excute(sql, null, callback);
 	}
 	// 用户交友相关操作
 	// 针对用户获取相应的陌生人
 	this.selectStranger = function(userId, callback) {
               var option = [userId];
-		var sql = "select users.* from users, friends where friends.userId2!=users.id and friends.userId1=?";
+		var sql = "select * from users";
 		sqlExcutor.excute(sql, option, callback);
 	}
 	this.insertFriend = function(userId1, userId2, status, callback) {

@@ -149,6 +149,19 @@ angular.module('BlankApp')
               });
        };
 
+       $scope.deleteChapter = function(item, ev) {
+              var confirm = $mdDialog.confirm()
+                    .parent(angular.element(document.body))
+                    .title('删除章节')
+                    .content('你确定要删除该章节么(删除后不可恢复)？')
+                    .targetEvent(ev)
+                    .ok('确定')
+                    .cancel('取消');
+              $mdDialog.show(confirm).then(function() {
+                    $scope.chapterList.splice(item, 1);
+              });
+       }
+
        $scope.showChapter = function(item) {
               $scope.showCourse = false;
               $scope.nowCourseId = item.courseId;

@@ -4,7 +4,7 @@ function CourseService(){
        // 获取所有课程
        this.selectAllCourses = function(callback) {
               var sql = "select * from course";
-              sqlExcutor.excute(sql, callback);
+              sqlExcutor.excute(sql, null, callback);
        }
        //获取课程信息
        this.selectCourse = function(courseId, callback) {
